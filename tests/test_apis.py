@@ -1,7 +1,7 @@
 import requests
 from dataclasses import dataclass
 
-from ..src.data.model.photo import Photo
+from ..src.data.model.unsplash_data import UnsplashPhoto
 from ..src.data.remote import *
 
 base_url = "https://api.unsplash.com"

@@ -1,7 +1,7 @@
 import sys
 import requests
 import json
-from src.data.model.photo import Photo
+from src.data.model.unsplash_data import Photo
 from src.data.constants import *
 
 print(f"sys.path: {sys.path}")
@@ -26,7 +26,6 @@ def get_photo(id: str):
     response = requests.get(api+query, headers=unsplash_headers)
     json_data = response.json()
     print(f"json_data type: {type(json_data)}")
-    print(f"json_data: {json_data}")
     print(f"{json.dumps(json_data, indent=4)}")
     dataclass_fields = set(Photo.__annotations__.keys())
     photo = Photo(**{k: v for k, v in json_data.items() if k in dataclass_fields})
