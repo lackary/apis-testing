@@ -1,0 +1,29 @@
+
+import sys
+import requests
+from ..model.photo import Photo
+from ..constants import *
+from .json_helper import *
+
+unsplash_headers = {"Authorization": f"Client-ID {KEY}"}
+
+def get_photos(per_page = 10):
+    api = base_url + "/photos"
+    query = f"?per_page={per_page}"
+    response = requests.get(api+query, headers=unsplash_headers)
+    json_data = response.json()
+    photos = dict_array_to_dataclass_list(Photo, json_data)
+    # dataclass_fields = set(Photo.__annotations__.keys())
+    # photos = [Photo(**{k: v for k, v in item.items() if k in dataclass_fields}) for item in json_data]
+    return photos
+
+def get_photo(id: str):
+    api = base_url + "/photos"
+    query = f"/{id}"
+    response = requests.get(api+query, headers=unsplash_headers)
+    json_data = response.json()
+
+    photo = dict_to_dataclass(Photo, json_data)
+    # dataclass_fields = set(Photo.__annotations__.keys())
+    # photo = Photo(**{k: v for k, v in json_data.items() if k in dataclass_fields})
+    return photo
