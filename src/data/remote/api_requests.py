@@ -12,7 +12,7 @@ def get_photos(per_page = 10):
     query = f"?per_page={per_page}"
     response = requests.get(api+query, headers=unsplash_headers)
     json_data = response.json()
-    photos = dict_array_to_dataclass_list(UnsplashPhoto, json_data)
+    photos = parse_json(json_data, UnsplashPhoto)
     # dataclass_fields = set(Photo.__annotations__.keys())
     # photos = [Photo(**{k: v for k, v in item.items() if k in dataclass_fields}) for item in json_data]
     return photos
@@ -23,7 +23,7 @@ def get_photo(id: str):
     response = requests.get(api+query, headers=unsplash_headers)
     json_data = response.json()
 
-    photo = dict_to_dataclass(UnsplashPhoto, json_data)
+    photo = parse_json(json_data, UnsplashPhoto)
     # dataclass_fields = set(Photo.__annotations__.keys())
     # photo = Photo(**{k: v for k, v in json_data.items() if k in dataclass_fields})
     return photo
