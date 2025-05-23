@@ -4,5 +4,5 @@ idna==3.10
 requests==2.32.3
 urllib3==2.3.0
 pytest==8.3.5
-pytest-dotenv==1.1.0
+python-dotenv==1.1.0
 selenium==4.31.0
