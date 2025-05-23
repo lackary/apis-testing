@@ -16,7 +16,7 @@ eval "$(pyenv init - zsh)"
 ```sh
 pyenv local $your_python_version
 source ~/.zshrc
-pyenv --versions
+pyenv versions
   system
 * $your_python_version
 python --version
@@ -27,4 +27,10 @@ python --version
 ```sh
 python -m venv .venv
 source .venv/bin/activate
+```
+
+- Install packages by pip
+
+```sh
+pip install -r requirements.txt
 ```
