@@ -2,38 +2,6 @@ from typing import List, Optional, Union, Dict, Any, get_type_hints, get_args, T
 
 T = TypeVar('T')  # 定義一個類型變數 T
 
-def dict_to_dataclass(data_dict, data_class):
-    """Converts a dictionary to a dataclass instance, ignoring extra keys.
-
-    Args:
-        data_class: The dataclass type to create.
-        data_dict: The dictionary to convert.
-
-    Returns:
-        An instance of the specified dataclass.
-    """
-
-    dataclass_fields = set(data_class.__annotations__.keys())
-    filtered_data = {k: v for k, v in data_dict.items() if k in dataclass_fields}
-    return data_class(**filtered_data)
-
-def dict_array_to_dataclass_list(dict_array, data_class):
-    """Converts a dictionary array to a list of dataclass instances, ignoring extra keys.
-
-    Args:
-        data_class: The dataclass type to create.
-        json_array: The JSON array of objects.
-
-    Returns:
-        A list of dataclass instances.
-    """
-
-    dataclass_fields = set(data_class.__annotations__.keys())
-    return [
-        data_class(**{k: v for k, v in item.items() if k in dataclass_fields})
-        for item in dict_array
-    ]
-
 def handle_dataclass(data: Dict[str, Any], dataclass_type: type) -> T:
     """Recursively creates dataclass instances from nested JSON."""
 
