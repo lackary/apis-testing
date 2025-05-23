@@ -13,6 +13,7 @@ jobs:
     env:
       BASE_URL: ${{ secrets.BASE_URL }}
       UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+      API_PHOTOS: ${{ secrets.API_PHOTOS }}
 
     steps:
       - name: ⬇️ Checkout code
