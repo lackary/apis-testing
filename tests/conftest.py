@@ -14,16 +14,6 @@ def base_url():
     assert base_url is not None, "BASE_URL environment variable not set"
     return base_url
 
-@pytest.fixture(scope="session")
-def api_photos():
-    """
-    Fixture to provide the API endpoint for photos.
-    """
-    api_photos = os.getenv("API_PHOTOS")
-    print(f"api_photos: {api_photos}")
-    assert api_photos is not None, "API_PHOTOS environment variable not set"
-    return api_photos
-
 @pytest.fixture
 def api_headers():
     """
@@ -35,3 +25,23 @@ def api_headers():
     return {
         "Authorization": f"Client-ID {access_key}"
     }
+
+@pytest.fixture(scope="session")
+def api_photos():
+    """
+    Fixture to provide the API endpoint for photos.
+    """
+    api_photos = os.getenv("API_PHOTOS")
+    print(f"api_photos: {api_photos}")
+    assert api_photos is not None, "API_PHOTOS environment variable not set"
+    return api_photos
+
+@pytest.fixture(scope="session")
+def api_collections():
+    """
+    Fixture to provide the API endpoint for collections.
+    """
+    api_collections = os.getenv("API_COLLECTIONS")
+    print(f"api_collections: {api_collections}")
+    assert api_collections is not None, "API_COLLECTIONS environment variable not set"
+    return api_collections

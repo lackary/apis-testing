@@ -1,4 +1,4 @@
-from ..src.data.remote.api_requests import *
+from src.data.remote.api_requests import *
 
 def test_get_photos():
     photos = get_photos(per_page=5)
