@@ -5,14 +5,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 @pytest.fixture(scope="session")
-def base_url():
+def api_url():
     """
     Fixture to provide the base URL for the API.
     """
-    base_url = os.getenv("BASE_URL")
-    print(f"base_url: {base_url}")
-    assert base_url is not None, "BASE_URL environment variable not set"
-    return base_url
+    api_url = os.getenv("API_URL")
+    print(f"base_url: {api_url}")
+    assert api_url is not None, "API_URL environment variable not set"
+    return api_url
 
 @pytest.fixture
 def api_headers():

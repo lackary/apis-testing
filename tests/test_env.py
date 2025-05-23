@@ -7,11 +7,11 @@ BASE_URL = "BASE_URL"
 UNSPLASH_ACCESS_KEY = "UNSPLASH_ACCESS_KEY"
 API_PHOTOS = "API_PHOTOS"
 
-def test_base_url():
+def test_api_url():
     """
     Test if the base URL is set in the environment variables.
     """
-    assert os.getenv("BASE_URL") is not None, "BASE_URL environment variable not set"
+    assert os.getenv("API_URL") is not None, "BASE_URL environment variable not set"
 
 def test_unsplash_access_key():
     """

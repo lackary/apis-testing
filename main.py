@@ -1,11 +1,11 @@
 import sys
+import os
 import logging
 import time
 import datetime
 from src.data.model.unsplash_data import UnsplashPhoto
 from src.data.remote.json_helper import parse_json
 from src.data.remote.api_requests import *
-from src.data.constants import *
 from src.utils.log_helper import Log
 from collections import defaultdict, Counter, deque
 import heapq
@@ -15,6 +15,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from config import DEBUG, API_URL, API_PHOTOS
 
 # print(f"sys.path: {sys.path}")
 print(f"{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}")
@@ -45,6 +47,10 @@ class MyClass:
         Log.c(__name__, 'This is a critical message.')
 
 def main(*args):
+    print("Debug mode:", DEBUG)
+    print("API URL:", API_URL)
+    print("API PHOTOS:", API_PHOTOS)
+    return
     Log.initialize(logging.DEBUG)
     driver = webdriver.Chrome()
     driver.get("https://www.google.com")
