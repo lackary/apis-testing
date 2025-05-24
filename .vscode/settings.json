@@ -1,0 +1,106 @@
+{
+  // ============== 全域使用者/工作區設定 ==============
+  "editor.tabSize": 2, // 預設縮排為 2 個空格
+  "editor.insertSpaces": true, // 預設使用空格而不是 Tab
+  "editor.wordWrap": "off", // 預設不自動換行
+  "editor.formatOnSave": true, // 預設儲存時自動格式化
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 預設使用 Prettier 格式化
+
+  // ============== 針對特定語言的設定 ==============
+
+  // JavaScript 和 TypeScript
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on", // JS 檔案自動換行
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // HTML
+  "[html]": {
+    "editor.tabSize": 4, // HTML 檔案縮排為 4 個空格
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // 可以指定其他 HTML 格式化器，例如 "vscode.html-language-features"
+  },
+
+  // CSS
+  "[css]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // JSON
+  "[json]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "off" // JSON 通常不需要自動換行
+  },
+  "[jsonc]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "off"
+  },
+
+  // Python
+  "[python]": {
+    "editor.tabSize": 4, // Python 通常使用 4 個空格縮排
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.python" // 假設你安裝了 Python 擴充功能，並將其設定為預設格式化器
+  },
+
+  // Markdown
+  "[markdown]": {
+    "editor.wordWrap": "on", // Markdown 檔案自動換行
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+
+  // YAML
+  "[yaml]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+
+  // Vue (需要 Vue.js Volar 擴充功能)
+  "[vue]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "Vue.volar", // 或 "esbenp.prettier-vscode" 如果 Prettier 配置了 Vue
+    "editor.formatOnSave": true
+  },
+
+  // Go
+  "[go]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true
+    // Go 語言通常有自己的內建格式化工具，例如 gofmt
+  }
+}
