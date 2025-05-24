@@ -1,37 +1,37 @@
 name: Run Pytest
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
 
-        env:
-            API_URL: ${{ secrets.API_URL }}
-            UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
-            API_PHOTOS: ${{ secrets.API_PHOTOS }}
-            API_COLLECTIONS: ${{ secrets.API_COLLECTIONS }}
-            API_USERS: ${{ secrets.API_USERS }}
-            API_SEARCH: ${{ secrets.API_SEARCH }}
-            API_PHOTOS_RANDOM: ${{ secrets.API_PHOTOS_RANDOM }}
+    env:
+      API_URL: ${{ secrets.API_URL }}
+      UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+      API_PHOTOS: ${{ secrets.API_PHOTOS }}
+      API_COLLECTIONS: ${{ secrets.API_COLLECTIONS }}
+      API_USERS: ${{ secrets.API_USERS }}
+      API_SEARCH: ${{ secrets.API_SEARCH }}
+      API_PHOTOS_RANDOM: ${{ secrets.API_PHOTOS_RANDOM }}
 
-        steps:
-            - name: ⬇️ Checkout code
-              uses: actions/checkout@v3
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
 
-            - name: 🐍 Set up Python
-              uses: actions/setup-python@v5
-              with:
-                  python-version: "3.13"
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
 
-            - name: 📦 Install dependencies
-              run: |
-                  python -m pip install --upgrade pip
-                  pip install -r requirements.txt
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-            - name: 🧪 Run tests
-              run: pytest
+      - name: 🧪 Run tests
+        run: pytest
