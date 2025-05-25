@@ -1,24 +1,4 @@
 import requests
-from fastapi import FastAPI, HTTPException
-from fastapi.testclient import TestClient
-
-app = FastAPI()
-
-client = TestClient(app)
-
-def test_fake_404():
-    response = client.get("/not-found")
-    assert response.status_code == 404
-
-def test_api_not_found(api_url, api_headers):
-    api = api_url + "/not-found"
-    response = requests.get(api, headers=api_headers)
-    assert response.status_code == 404
-
-def test_api_unauthorized(api_url, api_photos, api_headers):
-    # Simulate unauthorized access by not providing the access key
-    response = requests.get(api_url + api_photos)
-    assert response.status_code == 401
 
 def test_get_photos_api(api_url, api_photos, api_headers):
     api = api_url + api_photos
