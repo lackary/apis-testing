@@ -1,5 +1,7 @@
 # Testing
 
+![Tests](https://github.com/lackary/apis-testing/actions/workflows/test.yml/badge.svg)
+
 ## Installation and Setup
 
 - Install pyenv by brew (MacOS)
