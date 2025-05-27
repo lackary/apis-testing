@@ -1,10 +1,8 @@
-name: Run Pytest
+name: pytest-testing
 
 on:
-  push:
-    branches: [main]
   pull_request:
-    branches: [main]
+    branches: ["*"]
   schedule:
     - cron: "0 8 * * *" # Runs every day at midnight UTC+8
   workflow_dispatch:
@@ -21,6 +19,8 @@ jobs:
       API_USERS: ${{ secrets.API_USERS }}
       API_SEARCH: ${{ secrets.API_SEARCH }}
       API_PHOTOS_RANDOM: ${{ secrets.API_PHOTOS_RANDOM }}
+      # RUN_ID: ${{ github.run_id }}-${{ github.run_number }}
+      TS: ${{ github.run_attempt }}-${{ github.run_started_at }}
 
     steps:
       - name: ⬇️ Checkout code
@@ -34,7 +34,7 @@ jobs:
       - name: 🐍 Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: "temurin"
           java-version: "17"
 
       - name: 📦 Install dependencies for apis-testing
@@ -54,7 +54,7 @@ jobs:
           wget https://github.com/allure-framework/allure2/releases/download/${ALLURE_VERSION}/${DEB_PACKAGE}
           sudo dpkg -i ${DEB_PACKAGE}
           rm ${DEB_PACKAGE}
-          
+
       - name: Check Allure CLI
         run: |
           which allure
@@ -62,8 +62,8 @@ jobs:
 
         shell: bash
 
-      - name: Set RUN_ID
-        run: echo "RUN_ID=$GITHUB_RUN_ID" >> $GITHUB_ENV
+      # - name: Set RUN_ID
+      #   run: echo "RUN_ID=$GITHUB_RUN_ID" >> $GITHUB_ENV
 
       - name: 🧪 Run tests and generate reports
         run: |
@@ -77,6 +77,38 @@ jobs:
       - name: 📤 Upload reports folder
         uses: actions/upload-artifact@v4
         with:
-          name: reports-${{ env.RUN_ID }}
+          name: reports-${{ github.event.repository.name }}-${{ github.run_number }}
           path: reports/
           retention-days: 7
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    # Only deploy on main branch or on manual trigger
+    # if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download reports artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: reports-${{ github.event.repository.name }}-${{ github.run_number }}
+          path: reports
+
+      - name: Deploy reports to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./reports
+          publish_branch: gh-pages
+          force_orphan: true
+          destination_dir: ${{ github.ref_name }}
+
+      - name: Show deployed report URLs
+        run: |
+          echo "### Allure Report URL" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/allure/html/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Pytest HTML Report URL" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/pytest-html/report.html" >> $GITHUB_STEP_SUMMARY
