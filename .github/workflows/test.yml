@@ -4,12 +4,15 @@ on:
   pull_request:
     branches: ["*"]
   schedule:
-    - cron: "0 8 * * *" # Runs every day at midnight UTC+8
+    - cron: "0 0 * * *" # Runs every day at midnight UTC+8
   workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    outputs:
+      RUN_ID: ${{ steps.run_pytest.outputs.run_id }}
 
     env:
       API_URL: ${{ secrets.API_URL }}
@@ -18,9 +21,8 @@ jobs:
       API_COLLECTIONS: ${{ secrets.API_COLLECTIONS }}
       API_USERS: ${{ secrets.API_USERS }}
       API_SEARCH: ${{ secrets.API_SEARCH }}
-      API_PHOTOS_RANDOM: ${{ secrets.API_PHOTOS_RANDOM }}
       # RUN_ID: ${{ github.run_id }}-${{ github.run_number }}
-      TS: ${{ github.run_attempt }}-${{ github.run_started_at }}
+      # TS: ${{ github.run_attempt }}-${{ github.run_started_at }}
 
     steps:
       - name: ⬇️ Checkout code
@@ -60,7 +62,7 @@ jobs:
           which allure
           allure --version
 
-        shell: bash
+        # shell: bash
 
       # - name: Set RUN_ID
       #   run: echo "RUN_ID=$GITHUB_RUN_ID" >> $GITHUB_ENV
@@ -69,7 +71,10 @@ jobs:
         run: chmod +x run-pytest.sh
 
       - name: Run pytest shell script
-        run: ./run-pytest.sh
+        id: run_pytest
+        run: |
+          RUN_ID=$(./run-pytest.sh | tail -n 1)
+          echo "RUN_ID=$RUN_ID" >> $GITHUB_OUTPUT
 
       - name: 📤 Upload test-reports folder
         uses: actions/upload-artifact@v4
@@ -105,10 +110,10 @@ jobs:
       - name: Show deployed report URLs
         run: |
           echo "### Allure Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/allure/html/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/allure/reports/report-${{ needs.test.outputs.RUN_ID  }}/index.html" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Pytest HTML Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/pytest-html/report.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/report-${{ needs.test.outputs.RUN_ID  }}.html" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Coverage Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/pytest-cov/cov-${GITHUB_RUN_NUMBER}-html/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/pytest-cov/cov-${{ needs.test.outputs.RUN_ID  }}-html/index.html" >> $GITHUB_STEP_SUMMARY

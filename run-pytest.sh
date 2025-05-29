@@ -79,9 +79,6 @@ echo "✅ Pytest-HTML: test-reports/report-${RUN_ID}.html"
 echo "✅ Allure HTML: test-reports/allure/reports/report-${RUN_ID}"
 echo "✅ Coverage HTML: test-reports/pytest-cov/cov-${RUN_ID}-html"
 
-# Print the run ID for reference
-echo "Run ID: ${RUN_ID}"
-
 # Optionally, you can open the generated HTML report in a web browser
 # allure open test-reports/allure/reports/report-${RUN_ID}
 # open test-reports/pytest-cov/cov-${RUN_ID}-html/index.html
@@ -91,6 +88,9 @@ echo "Run ID: ${RUN_ID}"
 # xdg-open test-reports/report-${RUN_ID}.html || test-reports/report-${RUN_ID}.html
 # xdg-open test-reports/allure/reports/report-${RUN_ID} || test-reports/allure/reports/report-${RUN_ID}
 # xdg-open test-reports/pytest-cov/cov-${RUN_ID}-html/index.html || test-reports/pytest-cov/cov-${RUN_ID}-html/index.html
+
+# Print the run ID for reference
+echo "$RUN_ID"
 
 # Exit with success status
 exit 0
