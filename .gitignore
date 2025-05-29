@@ -50,7 +50,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-reports/
+test-reports/
 !reports/.nojekyll
 
 # Translations
@@ -127,12 +127,16 @@ celerybeat.pid
 .env
 .env.*
 env/
+
 # virtualenv
 .venv
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# logs
+logs/
 
 # Spyder project settings
 .spyderproject

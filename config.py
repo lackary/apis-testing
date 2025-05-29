@@ -15,3 +15,11 @@ DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 API_URL = os.getenv("API_URL")
 UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 API_PHOTOS = os.getenv("API_PHOTOS")
+API_COLLECTIONS = os.getenv("API_COLLECTIONS")
+API_USERS = os.getenv("API_USERS")
+API_SEARCH = os.getenv("API_SEARCH")
+API_HEADERS = {
+    "Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}",
+    "Accept-Version": "v1",
+    "Content-Type": "application/json"
+}
