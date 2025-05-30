@@ -73,7 +73,9 @@ jobs:
       - name: Run pytest shell script
         id: run_pytest
         run: |
-          RUN_ID=$(./run-pytest.sh | tail -n 1)
+          RUN_OUTPUT=$(./run-pytest.sh)
+          echo "$RUN_OUTPUT"
+          RUN_ID=$(echo "$RUN_OUTPUT" | tail -n 1)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_OUTPUT
 
       - name: 📤 Upload test-reports folder
