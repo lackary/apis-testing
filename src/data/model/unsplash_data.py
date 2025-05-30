@@ -37,10 +37,10 @@ class UnsplashUrls:
 
 dataclass
 class UnsplashSocial:
-    instagram_username: str
-    portfolio_url: str
-    twitter_username: str
-    paypal_email: str
+    instagram_username: Optional[str] = field(default=None)
+    portfolio_url: Optional[str] = field(default=None)
+    paypal_email: Optional[str] = field(default=None)
+    twitter_username: Optional[str] = field(default=None)
 
 dataclass
 class UnsplashPhotoLinks:
@@ -48,6 +48,14 @@ class UnsplashPhotoLinks:
     html: str
     download: str
     download_location: str
+
+@dataclass
+class UnsplashCollectionLinks:
+    self: str
+    html: str
+    photos: str
+    related: str
+
 @dataclass
 class UnsplashUser:
     id: str
@@ -56,13 +64,8 @@ class UnsplashUser:
     name: str
     first_name: str
     last_name: str
-    twitter_username: str
-    portfolio_url: str
-    bio: str
-    location: str
     links: UnsplashUserLinks
     profile_image: UnsplashUserProfileImage
-    instagram_username: str
     total_collections: int
     total_likes: int
     total_photos: int
@@ -72,26 +75,57 @@ class UnsplashUser:
     accepted_tos: bool
     for_hire: bool
     social: UnsplashSocial
-
+    twitter_username: Optional[str] = field(default=None)
+    portfolio_url: Optional[str] = field(default=None)
+    bio: Optional[str] = field(default=None)
+    location: Optional[str] = field(default=None)
+    instagram_username: Optional[str] = field(default=None)
 
 @dataclass
-class UnsplashPhoto:
+class UnsplashPrevewPhoto:
     id: str
     slug: str
     created_at: str
     updated_at: str
-    promoted_at: str
+    blur_hash: str
+    asset_type: str
+    urls: UnsplashUrls
+
+@dataclass
+class UnsplashPhoto(UnsplashPrevewPhoto):
+    # id: str
+    # slug: str
+    # created_at: str
+    # updated_at: str
     width: int
     height: int
-    urls: UnsplashUrls
+    # urls: UnsplashUrls
     links: UnsplashPhotoLinks
     color: str
-    blur_hash: str
+    # blur_hash: str
     description: str
     alt_description: str
     likes: int
     liked_by_user: bool
     current_user_collections: list
-    sponsorship: str
-    asset_type: str
+    # asset_type: str
     user: UnsplashUser
+    promoted_at: Optional[str] = field(default=None)
+    sponsorship: Optional[str] = field(default=None)
+
+@dataclass
+class UnsplashCollection:
+    id: str
+    title: str
+    description: str
+    published_at: str
+    last_collected_at: str
+    updated_at: str
+    featured: bool
+    total_photos: int
+    private: bool
+    share_key: str
+    links: UnsplashCollectionLinks
+    user: UnsplashUser
+    cover_photo: UnsplashPhoto
+    preview_photos: Optional[list[UnsplashPrevewPhoto]] = field(default=list)
