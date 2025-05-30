@@ -7,3 +7,12 @@ def test_get_photos():
 def test_get_photo():
     photo = get_photo(id="4ICax0QMs8U")
     assert photo.id == "4ICax0QMs8U"
+
+def test_get_collections():
+    collections = get_collections(per_page=5)
+    assert len(collections) == 5
+def test_get_collection():
+    collection = get_collection(id="26LduKzGz1Y")
+    assert collection.id == "26LduKzGz1Y"
+    assert collection.title is not None
+    assert isinstance(collection.user, UnsplashUser)
