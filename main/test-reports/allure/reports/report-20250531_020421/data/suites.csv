@@ -1,0 +1,37 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+Test if the API search endpoint is set in the environment variables.
+","0","test_api_search","tests","Sat May 31 02:04:23 UTC 2025","passed","Sat May 31 02:04:23 UTC 2025","","test_env","",""
+"
+Test if the Unsplash access key is set in the environment variables.
+","0","test_unsplash_access_key","tests","Sat May 31 02:04:23 UTC 2025","passed","Sat May 31 02:04:23 UTC 2025","","test_env","",""
+"","40","test_get_collection_api","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_api_status","",""
+"","225","test_get_photos","tests","Sat May 31 02:04:23 UTC 2025","passed","Sat May 31 02:04:23 UTC 2025","","test_unsplash_api_requests","",""
+"
+Test if the API returns a 404 status code for a non-existent endpoint.
+","114","test_server_not_found","tests","Sat May 31 02:04:25 UTC 2025","passed","Sat May 31 02:04:25 UTC 2025","","test_unsplash_status_code","",""
+"
+Test if the API photos random endpoint is set in the environment variables.
+","1","test_api_photos_random","tests","Sat May 31 02:04:23 UTC 2025","failed","Sat May 31 02:04:23 UTC 2025","","test_env","",""
+"
+Test if the base URL is set in the environment variables.
+","1","test_api_url","tests","Sat May 31 02:04:23 UTC 2025","passed","Sat May 31 02:04:23 UTC 2025","","test_env","",""
+"
+Test if the API returns a 400 status code for a bad request.
+","116","test_server_bad_request","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_status_code","",""
+"","107","test_get_collection","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_api_requests","",""
+"","156","test_get_photo","tests","Sat May 31 02:04:23 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_api_requests","",""
+"","68","test_fake_404","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_status_code","",""
+"","175","test_get_collections","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_api_requests","",""
+"
+Test if the API photos endpoint is set in the environment variables.
+","1","test_api_photos","tests","Sat May 31 02:04:23 UTC 2025","passed","Sat May 31 02:04:23 UTC 2025","","test_env","",""
+"","156","test_get_photos_api","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_api_status","",""
+"","50","test_get_photo_api","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_api_status","",""
+"
+Test if the API collections endpoint is set in the environment variables.
+","0","test_api_collections","tests","Sat May 31 02:04:23 UTC 2025","passed","Sat May 31 02:04:23 UTC 2025","","test_env","",""
+"","106","test_get_collections_api","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:24 UTC 2025","","test_unsplash_api_status","",""
+"
+Test if the API returns a 401 status code when unauthorized access is attempted.
+","112","test_server_unauthorized","tests","Sat May 31 02:04:24 UTC 2025","passed","Sat May 31 02:04:25 UTC 2025","","test_unsplash_status_code","",""

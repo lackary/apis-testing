@@ -1,0 +1,24 @@
+2025-05-31 02:04:23.762 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:23.982 - DEBUG - https://api.unsplash.com:443 "GET /photos?per_page=5 HTTP/1.1" 200 4334
+2025-05-31 02:04:23.989 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:24.142 - DEBUG - https://api.unsplash.com:443 "GET /photos/4ICax0QMs8U HTTP/1.1" 200 3463
+2025-05-31 02:04:24.147 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:24.316 - DEBUG - https://api.unsplash.com:443 "GET /collections?per_page=5 HTTP/1.1" 200 8295
+2025-05-31 02:04:24.324 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:24.428 - DEBUG - https://api.unsplash.com:443 "GET /collections/26LduKzGz1Y HTTP/1.1" 200 2272
+2025-05-31 02:04:24.434 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:24.587 - DEBUG - https://api.unsplash.com:443 "GET /photos HTTP/1.1" 200 8273
+2025-05-31 02:04:24.592 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:24.640 - DEBUG - https://api.unsplash.com:443 "GET /photos/4ICax0QMs8U HTTP/1.1" 200 3463
+2025-05-31 02:04:24.645 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:24.749 - DEBUG - https://api.unsplash.com:443 "GET /collections HTTP/1.1" 200 14518
+2025-05-31 02:04:24.755 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:24.793 - DEBUG - https://api.unsplash.com:443 "GET /collections/26LduKzGz1Y HTTP/1.1" 200 2272
+2025-05-31 02:04:24.861 - DEBUG - Using selector: EpollSelector
+2025-05-31 02:04:24.864 - INFO - HTTP Request: GET http://testserver/not-found "HTTP/1.1 404 Not Found"
+2025-05-31 02:04:24.869 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:24.983 - DEBUG - https://api.unsplash.com:443 "GET /search/photos HTTP/1.1" 400 None
+2025-05-31 02:04:24.988 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:25.097 - DEBUG - https://api.unsplash.com:443 "GET /photos?Authorization=Client-ID+**** HTTP/1.1" 401 None
+2025-05-31 02:04:25.102 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-05-31 02:04:25.215 - DEBUG - https://api.unsplash.com:443 "GET /not-found HTTP/1.1" 404 50
