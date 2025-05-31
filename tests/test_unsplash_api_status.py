@@ -21,3 +21,15 @@ def test_get_collection_api(api_url, api_collections, api_headers):
     collection_id = "26LduKzGz1Y"
     response = requests.get(f"{api}/{collection_id}", headers=api_headers)
     assert response.status_code == 200
+
+def test_get_search_photos_api(api_url, api_search, api_photos, api_headers):
+    api = api_url + api_search + api_photos
+    query = "Taipei"
+    response = requests.get(f"{api}", params={"query": query, "per_page": 5}, headers=api_headers)
+    assert response.status_code == 200
+
+def test_get_search_collections_api(api_url, api_search, api_collections, api_headers):
+    api = api_url + api_search + api_collections
+    query = "Taipei"
+    response = requests.get(f"{api}", params={"query": query, "per_page": 5}, headers=api_headers)
+    assert response.status_code == 200

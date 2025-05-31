@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, Union, List
 
 dataclass
 class UnsplashAlternativeSlugs:
@@ -93,23 +93,16 @@ class UnsplashPrevewPhoto:
 
 @dataclass
 class UnsplashPhoto(UnsplashPrevewPhoto):
-    # id: str
-    # slug: str
-    # created_at: str
-    # updated_at: str
     width: int
     height: int
-    # urls: UnsplashUrls
     links: UnsplashPhotoLinks
     color: str
-    # blur_hash: str
-    description: str
     alt_description: str
     likes: int
     liked_by_user: bool
     current_user_collections: list
-    # asset_type: str
     user: UnsplashUser
+    description: Optional[str] = field(default=None)
     promoted_at: Optional[str] = field(default=None)
     sponsorship: Optional[str] = field(default=None)
 
@@ -129,3 +122,9 @@ class UnsplashCollection:
     user: UnsplashUser
     cover_photo: UnsplashPhoto
     preview_photos: Optional[list[UnsplashPrevewPhoto]] = field(default=list)
+
+@dataclass
+class UnsplashSearch:
+    total: int
+    total_pages: int
+    results: List[Union[UnsplashPhoto, UnsplashCollection]]

@@ -1,4 +1,5 @@
 from src.data.remote.api_requests import *
+from config import API_COLLECTIONS, API_PHOTOS, API_USERS
 
 def test_get_photos():
     photos = get_photos(per_page=5)
@@ -10,9 +11,27 @@ def test_get_photo():
 
 def test_get_collections():
     collections = get_collections(per_page=5)
+
     assert len(collections) == 5
 def test_get_collection():
     collection = get_collection(id="26LduKzGz1Y")
     assert collection.id == "26LduKzGz1Y"
     assert collection.title is not None
     assert isinstance(collection.user, UnsplashUser)
+
+def test_get_search_photos():
+    search_results = get_search(category=API_PHOTOS, query="Taipei", per_page=5)
+    assert len(search_results) == 5
+    for photo in search_results:
+        assert isinstance(photo, UnsplashPhoto)
+        assert photo.id is not None
+        assert isinstance(photo.user, UnsplashUser)
+
+def test_get_search_collections():
+    search_results = get_search(category=API_COLLECTIONS, query="Taipei", per_page=5)
+    assert len(search_results) == 5
+    for collection in search_results:
+        assert isinstance(collection, UnsplashCollection)
+        assert collection.id is not None
+        assert isinstance(collection.user, UnsplashUser)
+        assert isinstance(collection.cover_photo, UnsplashPhoto) if collection.cover_photo else True

@@ -25,10 +25,16 @@ def handle_dataclass(data: Dict[str, Any], dataclass_type: type) -> T:
         if hasattr(field_type, '__origin__') and field_type.__origin__ is list:  # Handle lists
             inner_type = get_args(field_type)[0]
             if isinstance(field_value, list):
-                fields[field_name] = [
-                    handle_dataclass(item, inner_type) if hasattr(inner_type, '__dataclass_fields__') and isinstance(item, dict) else item
-                    for item in field_value
-                ]
+                # If inner_type is Union, recursively handle each item with Union logic
+                if hasattr(inner_type, '__origin__') and inner_type.__origin__ is Union:
+                    fields[field_name] = [
+                        handle_union(item, get_args(inner_type)) for item in field_value
+                    ]
+                else:
+                    fields[field_name] = [
+                        handle_dataclass(item, inner_type) if hasattr(inner_type, '__dataclass_fields__') and isinstance(item, dict) else item
+                        for item in field_value
+                    ]
             elif field_value is None:
                 fields[field_name] = []  # Handle missing list as empty list
             else:
@@ -61,6 +67,19 @@ def handle_dataclass(data: Dict[str, Any], dataclass_type: type) -> T:
         return dataclass_type(**fields)
     except TypeError as e:
         raise TypeError(f"Error creating {dataclass_type.__name__}: {e}. Check JSON and dataclass definitions.")
+
+def handle_union(field_value, inner_types):
+    for inner_type in inner_types:
+        if inner_type is type(None) and field_value is None:
+            return None
+        elif hasattr(inner_type, '__dataclass_fields__') and isinstance(field_value, dict):
+            try:
+                return handle_dataclass(field_value, inner_type)
+            except (TypeError, ValueError):
+                pass
+        elif isinstance(field_value, inner_type.__origin__ if hasattr(inner_type, '__origin__') else inner_type):
+            return field_value
+    raise TypeError(f"No matching type found for Union item: {field_value}")
 
 def parse_json(json_data: Dict[str, Any], dataclass_type: type):
     """parse json data to dataclass"""
