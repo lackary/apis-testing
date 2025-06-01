@@ -19,6 +19,29 @@ def test_get_collection():
     assert collection.title is not None
     assert isinstance(collection.user, UnsplashUser)
 
+def test_get_user():
+    user = get_user(username="pawel_czerwinski")
+    assert user.username == "pawel_czerwinski"
+    assert user.name is not None
+    assert user.bio is not None
+
+def test_get_user_photos():
+    user_photos = get_user_photos(username="pawel_czerwinski", per_page=5)
+    assert len(user_photos) == 5
+    for photo in user_photos:
+        assert isinstance(photo, UnsplashPhoto)
+        assert photo.id is not None
+        assert isinstance(photo.user, UnsplashUser)
+
+def test_get_user_collections():
+    user_collections = get_user_collections(username="pawel_czerwinski", per_page=5)
+    assert len(user_collections) == 5
+    for collection in user_collections:
+        assert isinstance(collection, UnsplashCollection)
+        assert collection.id is not None
+        assert isinstance(collection.user, UnsplashUser)
+        assert isinstance(collection.cover_photo, UnsplashPhoto) if collection.cover_photo else True
+
 def test_get_search_photos():
     search_results = get_search(category=API_PHOTOS, query="Taipei", per_page=5)
     assert len(search_results) == 5

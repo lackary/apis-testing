@@ -4,7 +4,7 @@ import os
 import requests
 from src.data.model.unsplash_data import *
 from src.data.remote.json_helper import *
-from config import API_URL, UNSPLASH_ACCESS_KEY, API_PHOTOS, API_COLLECTIONS, API_SEARCH
+from config import API_URL, UNSPLASH_ACCESS_KEY, API_PHOTOS, API_COLLECTIONS, API_USERS, API_SEARCH
 
 unsplash_headers = {
     "Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}",
@@ -73,6 +73,39 @@ def get_collection(id: str, headers = unsplash_headers):
     json_data = response.json()
     collection = parse_json(json_data, UnsplashCollection)
     return collection
+
+def get_user(username: str, headers = unsplash_headers):
+    """
+    Get user information by username.
+    """
+    api = API_URL + API_USERS
+    query = f"/{username}"
+    response = requests.get(api+query, headers=headers)
+    json_data = response.json()
+    user = parse_json(json_data, UnsplashUser)
+    return user
+
+def get_user_photos(username: str, per_page = 10, headers = unsplash_headers):
+    """
+    Get photos uploaded by a user.
+    """
+    api = API_URL + API_USERS
+    query = f"/{username}{API_PHOTOS}?per_page={per_page}"
+    response = requests.get(api+query, headers=headers)
+    json_data = response.json()
+    photos = parse_json(json_data, UnsplashPhoto)
+    return photos
+
+def get_user_collections(username: str, per_page = 10, headers = unsplash_headers):
+    """
+    Get collections created by a user.
+    """
+    api = API_URL + API_USERS
+    query = f"/{username}{API_COLLECTIONS}?per_page={per_page}"
+    response = requests.get(api+query, headers=headers)
+    json_data = response.json()
+    collections = parse_json(json_data, UnsplashCollection)
+    return collections
 
 @safe_api_call
 def get_search(category: str, query: str, per_page = 10, headers = unsplash_headers):
