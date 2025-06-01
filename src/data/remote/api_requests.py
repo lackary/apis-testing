@@ -17,6 +17,28 @@ SEARCH_MAP = {
     API_COLLECTIONS: API_COLLECTIONS,
 }
 
+def safe_api_call(func):
+    """
+    Decorator to handle API call exceptions.
+    """
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except requests.exceptions.RequestException as e:
+            print(f"API call failed: {e}", file=sys.stderr)
+        except ValueError as e:
+            print(f"JSON parsing error: {e}", file=sys.stderr)
+        except TypeError as e:
+            print(f"Type error: {e}", file=sys.stderr)
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}", file=sys.stderr)
+        finally:
+            # Optionally, you can log the error or take other actions
+            print("API call completed with errors.", file=sys.stderr)
+        return None
+    return wrapper
+
+@safe_api_call
 def get_photos(per_page = 10, headers = unsplash_headers):
     api = API_URL + API_PHOTOS
     query = f"?per_page={per_page}"
@@ -25,6 +47,7 @@ def get_photos(per_page = 10, headers = unsplash_headers):
     photos = parse_json(json_data, UnsplashPhoto)
     return photos
 
+@safe_api_call
 def get_photo(id: str, headers = unsplash_headers):
     api = API_URL + API_PHOTOS
     query = f"/{id}"
@@ -33,6 +56,7 @@ def get_photo(id: str, headers = unsplash_headers):
     photo = parse_json(json_data, UnsplashPhoto)
     return photo
 
+@safe_api_call
 def get_collections(per_page = 10, headers = unsplash_headers):
     api = API_URL + API_COLLECTIONS
     query = f"?per_page={per_page}"
@@ -41,6 +65,7 @@ def get_collections(per_page = 10, headers = unsplash_headers):
     collections = parse_json(json_data, UnsplashCollection)
     return collections
 
+@safe_api_call
 def get_collection(id: str, headers = unsplash_headers):
     api = API_URL + API_COLLECTIONS
     query = f"/{id}"
@@ -49,6 +74,7 @@ def get_collection(id: str, headers = unsplash_headers):
     collection = parse_json(json_data, UnsplashCollection)
     return collection
 
+@safe_api_call
 def get_search(category: str, query: str, per_page = 10, headers = unsplash_headers):
     if category not in SEARCH_MAP:
         raise ValueError("Unknown category")
