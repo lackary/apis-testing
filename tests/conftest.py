@@ -43,6 +43,15 @@ def api_collections():
     return api_collections
 
 @pytest.fixture(scope="session")
+def api_users():
+    """
+    Fixture to provide the API endpoint for users.
+    """
+    api_users = os.getenv("API_USERS")
+    assert api_users is not None, "API_USERS environment variable not set"
+    return api_users
+
+@pytest.fixture(scope="session")
 def api_search():
     """
     Fixture to provide the API endpoint for search.

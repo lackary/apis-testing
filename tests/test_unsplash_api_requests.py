@@ -58,3 +58,11 @@ def test_get_search_collections():
         assert collection.id is not None
         assert isinstance(collection.user, UnsplashUser)
         assert isinstance(collection.cover_photo, UnsplashPhoto) if collection.cover_photo else True
+
+def test_get_search_users():
+    search_results = get_search(category=API_USERS, query="Taipei", per_page=5)
+    assert len(search_results) == 5
+    for user in search_results:
+        assert isinstance(user, UnsplashUser)
+        assert user.username is not None
+        assert user.name is not None

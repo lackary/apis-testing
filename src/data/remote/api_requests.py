@@ -15,6 +15,7 @@ unsplash_headers = {
 SEARCH_MAP = {
     API_PHOTOS: API_PHOTOS,
     API_COLLECTIONS: API_COLLECTIONS,
+    API_USERS: API_USERS
 }
 
 def safe_api_call(func):

@@ -127,4 +127,4 @@ class UnsplashCollection:
 class UnsplashSearch:
     total: int
     total_pages: int
-    results: List[Union[UnsplashPhoto, UnsplashCollection]]
+    results: List[Union[UnsplashPhoto, UnsplashCollection, UnsplashUser]]
