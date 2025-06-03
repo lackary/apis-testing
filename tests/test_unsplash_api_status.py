@@ -54,3 +54,20 @@ def test_get_search_users_api(api_url, api_search, api_users, api_headers):
     query = "Taipei"
     response = requests.get(f"{api}", params={"query": query, "per_page": 5}, headers=api_headers)
     assert response.status_code == 200
+
+def test_get_topics_api(api_url, api_topics, api_headers):
+    api = api_url + api_topics
+    response = requests.get(api, headers=api_headers)
+    assert response.status_code == 200
+
+def test_get_topic_api(api_url, api_topics, api_headers):
+    api = api_url + api_topics
+    topic_id = "wallpapers"
+    response = requests.get(f"{api}/{topic_id}", headers=api_headers)
+    assert response.status_code == 200
+
+def test_get_topic_photos_api(api_url, api_topics, api_headers):
+    api = api_url + api_topics
+    topic_id = "wallpapers"
+    response = requests.get(f"{api}/{topic_id}/photos", headers=api_headers)
+    assert response.status_code == 200

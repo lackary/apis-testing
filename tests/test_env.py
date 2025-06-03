@@ -42,3 +42,9 @@ def test_api_search():
     Test if the API search endpoint is set in the environment variables.
     """
     assert os.getenv("API_SEARCH") is not None, "API_SEARCH environment variable not set"
+
+def test_api_topics():
+    """
+    Test if the API topics endpoint is set in the environment variables.
+    """
+    assert os.getenv("API_TOPICS") is not None, "API_TOPICS environment variable not set"

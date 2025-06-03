@@ -1,60 +1,59 @@
 from dataclasses import dataclass, field
 from typing import Optional, Union, List
 
-dataclass
-class UnsplashAlternativeSlugs:
-    en: Optional[str] = field(default=None)
-    es: Optional[str] = field(default=None)
-    ja: Optional[str] = field(default=None)
-    fr: Optional[str] = field(default=None)
-    it: Optional[str] = field(default=None)
-    ko: Optional[str] = field(default=None)
-    de: Optional[str] = field(default=None)
-    pt: Optional[str] = field(default=None)
-
-dataclass
-class UnsplashUserLinks:
+@dataclass
+class UnsplashBaseLinks:
     self: str
     html: str
+
+@dataclass
+class UnsplashAlternativeSlugs:
+    en: Optional[str] = None
+    es: Optional[str] = None
+    ja: Optional[str] = None
+    fr: Optional[str] = None
+    it: Optional[str] = None
+    ko: Optional[str] = None
+    de: Optional[str] = None
+    pt: Optional[str] = None
+
+@dataclass
+class UnsplashUserLinks(UnsplashBaseLinks):
     photos: str
     likes: str
     portfolio: str
 
-dataclass
+@dataclass
 class UnsplashUserProfileImage:
     small: str
     medium: str
     large: str
 
-dataclass
+@dataclass
 class UnsplashUrls:
     raw: str
     full: str
     regular: str
     small: str
     thumb: str
-    small_s3: str
+    small_s3: Optional[str] = None
 
-dataclass
+@dataclass
 class UnsplashSocial:
-    instagram_username: Optional[str] = field(default=None)
-    portfolio_url: Optional[str] = field(default=None)
-    paypal_email: Optional[str] = field(default=None)
-    twitter_username: Optional[str] = field(default=None)
+    instagram_username: Optional[str] = None
+    portfolio_url: Optional[str] = None
+    paypal_email: Optional[str] = None
+    twitter_username: Optional[str] = None
 
-dataclass
-class UnsplashPhotoLinks:
-    self: str
-    html: str
+@dataclass
+class UnsplashPhotoLinks(UnsplashBaseLinks):
     download: str
     download_location: str
 
 @dataclass
-class UnsplashCollectionLinks:
-    self: str
-    html: str
+class UnsplashCollectionLinks(UnsplashBaseLinks):
     photos: str
-    related: str
+    related: Optional[str] = None
 
 @dataclass
 class UnsplashUser:
@@ -75,11 +74,11 @@ class UnsplashUser:
     accepted_tos: bool
     for_hire: bool
     social: UnsplashSocial
-    twitter_username: Optional[str] = field(default=None)
-    portfolio_url: Optional[str] = field(default=None)
-    bio: Optional[str] = field(default=None)
-    location: Optional[str] = field(default=None)
-    instagram_username: Optional[str] = field(default=None)
+    twitter_username: Optional[str] = None
+    portfolio_url: Optional[str] = None
+    bio: Optional[str] = None
+    location: Optional[str] = None
+    instagram_username: Optional[str] = None
 
 @dataclass
 class UnsplashPrevewPhoto:
@@ -102,9 +101,9 @@ class UnsplashPhoto(UnsplashPrevewPhoto):
     liked_by_user: bool
     current_user_collections: list
     user: UnsplashUser
-    description: Optional[str] = field(default=None)
-    promoted_at: Optional[str] = field(default=None)
-    sponsorship: Optional[str] = field(default=None)
+    description: Optional[str] = None
+    promoted_at: Optional[str] = None
+    sponsorship: Optional[str] = None
 
 @dataclass
 class UnsplashCollection:
@@ -128,3 +127,26 @@ class UnsplashSearch:
     total: int
     total_pages: int
     results: List[Union[UnsplashPhoto, UnsplashCollection, UnsplashUser]]
+
+@dataclass
+class UnsplashTopic:
+    id: str
+    slug: str
+    title: str
+    published_at: str
+    updated_at: str
+    visibility: str
+    featured: bool
+    total_photos: int
+    links: UnsplashCollectionLinks = None
+    description: Optional[str] = None
+    starts_at: Optional[str] = None
+    ends_at: Optional[str] = None
+    only_submissions_after: Optional[str] = None
+    current_user_contributions: list = field(default_factory=list)
+    total_current_user_submissions: Optional[int] = None
+    media_types: Optional[List[str]] = field(default_factory=list)
+    status: Optional[str] = None
+    owners: Optional[List[UnsplashUser]] = field(default_factory=list)
+    cover_photo: Optional[UnsplashPhoto] = None
+    preview_photos: Optional[List[UnsplashPrevewPhoto]] = field(default_factory=list)

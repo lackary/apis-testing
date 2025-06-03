@@ -59,3 +59,12 @@ def api_search():
     api_search = os.getenv("API_SEARCH")
     assert api_search is not None, "API_SEARCH environment variable not set"
     return api_search
+
+@pytest.fixture(scope="session")
+def api_topics():
+    """
+    Fixture to provide the API endpoint for topics.
+    """
+    api_topics = os.getenv("API_TOPICS")
+    assert api_topics is not None, "API_TOPICS environment variable not set"
+    return api_topics
