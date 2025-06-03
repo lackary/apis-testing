@@ -21,6 +21,7 @@ jobs:
       API_COLLECTIONS: ${{ secrets.API_COLLECTIONS }}
       API_USERS: ${{ secrets.API_USERS }}
       API_SEARCH: ${{ secrets.API_SEARCH }}
+      API_TOPICS: ${{ secrets.API_TOPICS }}
       # RUN_ID: ${{ github.run_id }}-${{ github.run_number }}
       # TS: ${{ github.run_attempt }}-${{ github.run_started_at }}
 

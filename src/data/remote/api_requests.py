@@ -1,10 +1,9 @@
-
 import sys
 import os
 import requests
 from src.data.model.unsplash_data import *
 from src.data.remote.json_helper import *
-from config import API_URL, UNSPLASH_ACCESS_KEY, API_PHOTOS, API_COLLECTIONS, API_USERS, API_SEARCH
+from config import API_URL, UNSPLASH_ACCESS_KEY, API_PHOTOS, API_COLLECTIONS, API_USERS, API_SEARCH, API_TOPICS
 
 unsplash_headers = {
     "Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}",
@@ -15,6 +14,7 @@ unsplash_headers = {
 SEARCH_MAP = {
     API_PHOTOS: API_PHOTOS,
     API_COLLECTIONS: API_COLLECTIONS,
+    API_USERS: API_USERS
 }
 
 def safe_api_call(func):
@@ -117,3 +117,40 @@ def get_search(category: str, query: str, per_page = 10, headers = unsplash_head
     json_data = response.json()
     search_data = parse_json(json_data, UnsplashSearch)
     return search_data.results
+
+@safe_api_call
+def get_topics(per_page = 10, headers = unsplash_headers):
+    """
+    Get topics from the Unsplash API.
+    """
+    api = API_URL + API_TOPICS
+    query = f"?per_page={per_page}"
+    response = requests.get(api+query, headers=headers)
+    json_data = response.json()
+    topics = parse_json(json_data, UnsplashTopic)
+    return topics
+
+@safe_api_call
+def get_topic(id_or_slug: str, headers = unsplash_headers):
+    """
+    Get a specific topic by its ID.
+    """
+    api = API_URL + API_TOPICS
+    query = f"/{id_or_slug}"
+    response = requests.get(api+query, headers=headers)
+    json_data = response.json()
+    topic = parse_json(json_data, UnsplashTopic)
+    return topic
+
+
+@safe_api_call
+def get_topic_photos(id_or_slug: str, per_page = 10, headers = unsplash_headers):
+    """
+    Get photos for a specific topic.
+    """
+    api = API_URL + API_TOPICS
+    query = f"/{id_or_slug}{API_PHOTOS}?per_page={per_page}"
+    response = requests.get(api+query, headers=headers)
+    json_data = response.json()
+    photos = parse_json(json_data, UnsplashPhoto)
+    return photos

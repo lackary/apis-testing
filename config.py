@@ -18,6 +18,7 @@ API_PHOTOS = os.getenv("API_PHOTOS")
 API_COLLECTIONS = os.getenv("API_COLLECTIONS")
 API_USERS = os.getenv("API_USERS")
 API_SEARCH = os.getenv("API_SEARCH")
+API_TOPICS = os.getenv("API_TOPICS")
 API_HEADERS = {
     "Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}",
     "Accept-Version": "v1",

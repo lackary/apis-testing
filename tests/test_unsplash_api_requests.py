@@ -58,3 +58,36 @@ def test_get_search_collections():
         assert collection.id is not None
         assert isinstance(collection.user, UnsplashUser)
         assert isinstance(collection.cover_photo, UnsplashPhoto) if collection.cover_photo else True
+
+def test_get_search_users():
+    search_results = get_search(category=API_USERS, query="Taipei", per_page=5)
+    assert len(search_results) == 5
+    for user in search_results:
+        assert isinstance(user, UnsplashUser)
+        assert user.username is not None
+        assert user.name is not None
+
+def test_get_topics():
+    topics = get_topics(per_page=5)
+    assert len(topics) == 5
+    for topic in topics:
+        assert isinstance(topic, UnsplashTopic)
+        assert topic.id is not None
+        assert topic.slug is not None
+        assert topic.title is not None
+        assert topic.visibility in ["visible", "featured"]
+
+def test_get_topic():
+    topic = get_topic(id_or_slug="wallpapers")
+    assert topic.id is not None
+    assert topic.slug == "wallpapers"
+    assert topic.title is not None
+    assert topic.visibility in ["visible", "featured"]
+
+def test_get_topic_photos():
+    topic_photos = get_topic_photos(id_or_slug="wallpapers", per_page=5)
+    assert len(topic_photos) == 5
+    for photo in topic_photos:
+        assert isinstance(photo, UnsplashPhoto)
+        assert photo.id is not None
+        assert isinstance(photo.user, UnsplashUser)

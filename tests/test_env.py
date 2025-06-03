@@ -31,14 +31,20 @@ def test_api_collections():
     """
     assert os.getenv("API_COLLECTIONS") is not None, "API_COLLECTIONS environment variable not set"
 
+def test_api_users():
+    """
+    Test if the API users endpoint is set in the environment variables.
+    """
+    assert os.getenv("API_USERS") is not None, "API_USERS environment variable not set"
+
 def test_api_search():
     """
     Test if the API search endpoint is set in the environment variables.
     """
     assert os.getenv("API_SEARCH") is not None, "API_SEARCH environment variable not set"
 
-def test_api_photos_random():
+def test_api_topics():
     """
-    Test if the API photos random endpoint is set in the environment variables.
+    Test if the API topics endpoint is set in the environment variables.
     """
-    assert os.getenv("API_PHOTOS_RANDOM") is not None, "API_PHOTOS_RANDOM environment variable not set"
+    assert os.getenv("API_TOPICS") is not None, "API_TOPICS environment variable not set"
