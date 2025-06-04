@@ -1,5 +1,15 @@
+import pytest
 from src.data.remote.api_requests import *
 from config import API_COLLECTIONS, API_PHOTOS, API_USERS
+
+@pytest.mark.asyncio
+async def test_get_photos_async(unsplash_api):
+    photos = await unsplash_api.get_photos(per_page=5)
+    assert len(photos) == 5
+    for photo in photos:
+        assert isinstance(photo, UnsplashPhoto)
+        assert photo.id is not None
+        assert isinstance(photo.user, UnsplashUser)
 
 def test_get_photos():
     photos = get_photos(per_page=5)
