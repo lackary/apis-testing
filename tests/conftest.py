@@ -1,9 +1,12 @@
 import pytest
+import pytest_asyncio
 import os
 from dotenv import load_dotenv
+from src.di.app_container import AppContainer
 
 load_dotenv()
 
+pytest_plugins = ["pytest_asyncio"]
 @pytest.fixture(scope="session")
 def api_url():
     """
@@ -68,3 +71,24 @@ def api_topics():
     api_topics = os.getenv("API_TOPICS")
     assert api_topics is not None, "API_TOPICS environment variable not set"
     return api_topics
+
+@pytest_asyncio.fixture(scope="function")
+async def unsplash_api():
+    """
+    Fixture to provide an instance of the Unsplash API client.
+    """
+    api_url = os.getenv("API_URL")
+    unsplash_access_key = os.getenv("UNSPLASH_ACCESS_KEY")
+    container = AppContainer()
+    container.config.api_url.from_value(api_url)
+    container.config.unsplash_access_key.from_value(unsplash_access_key)
+
+    unsplash_api = container.unsplash_api()
+    assert unsplash_api is not None, "Unsplash API client not initialized"
+    yield unsplash_api
+    # close client after all tests
+    try:
+        await unsplash_api._client.aclose()
+    except RuntimeError as e:
+        if "Event loop is closed" not in str(e):
+            raise  # Ensure the client is closed after tests
