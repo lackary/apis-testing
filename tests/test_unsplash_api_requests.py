@@ -125,30 +125,36 @@ async def test_get_search_users_async(unsplash_api):
         assert user.username is not None
         assert user.name is not None
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_photos():
     photos = get_photos(per_page=5)
     assert len(photos) == 5
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_photo():
     photo = get_photo(id="4ICax0QMs8U")
     assert photo.id == "4ICax0QMs8U"
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_collections():
     collections = get_collections(per_page=5)
-
     assert len(collections) == 5
+
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_collection():
     collection = get_collection(id="26LduKzGz1Y")
     assert collection.id == "26LduKzGz1Y"
     assert collection.title is not None
     assert isinstance(collection.user, UnsplashUser)
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_user():
     user = get_user(username="pawel_czerwinski")
     assert user.username == "pawel_czerwinski"
     assert user.name is not None
     assert user.bio is not None
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_user_photos():
     user_photos = get_user_photos(username="pawel_czerwinski", per_page=5)
     assert len(user_photos) == 5
@@ -157,6 +163,7 @@ def test_get_user_photos():
         assert photo.id is not None
         assert isinstance(photo.user, UnsplashUser)
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_user_collections():
     user_collections = get_user_collections(username="pawel_czerwinski", per_page=5)
     assert len(user_collections) == 5
@@ -166,6 +173,7 @@ def test_get_user_collections():
         assert isinstance(collection.user, UnsplashUser)
         assert isinstance(collection.cover_photo, UnsplashPhoto) if collection.cover_photo else True
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_search_photos():
     search_results = get_search(category=API_PHOTOS, query="Taipei", per_page=5)
     assert len(search_results) == 5
@@ -174,6 +182,7 @@ def test_get_search_photos():
         assert photo.id is not None
         assert isinstance(photo.user, UnsplashUser)
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_search_collections():
     search_results = get_search(category=API_COLLECTIONS, query="Taipei", per_page=5)
     assert len(search_results) == 5
@@ -183,6 +192,7 @@ def test_get_search_collections():
         assert isinstance(collection.user, UnsplashUser)
         assert isinstance(collection.cover_photo, UnsplashPhoto) if collection.cover_photo else True
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_search_users():
     search_results = get_search(category=API_USERS, query="Taipei", per_page=5)
     assert len(search_results) == 5
@@ -191,6 +201,7 @@ def test_get_search_users():
         assert user.username is not None
         assert user.name is not None
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_topics():
     topics = get_topics(per_page=5)
     assert len(topics) == 5
@@ -201,6 +212,7 @@ def test_get_topics():
         assert topic.title is not None
         assert topic.visibility in ["visible", "featured"]
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_topic():
     topic = get_topic(id_or_slug="wallpapers")
     assert topic.id is not None
@@ -208,6 +220,7 @@ def test_get_topic():
     assert topic.title is not None
     assert topic.visibility in ["visible", "featured"]
 
+@pytest.mark.skip(reason = "discarded due to using async")
 def test_get_topic_photos():
     topic_photos = get_topic_photos(id_or_slug="wallpapers", per_page=5)
     assert len(topic_photos) == 5

@@ -72,7 +72,7 @@ def api_topics():
     assert api_topics is not None, "API_TOPICS environment variable not set"
     return api_topics
 
-@pytest_asyncio.fixture(scope="module")
+@pytest_asyncio.fixture(scope="function")
 async def unsplash_api():
     """
     Fixture to provide an instance of the Unsplash API client.
@@ -83,8 +83,12 @@ async def unsplash_api():
     container.config.api_url.from_value(api_url)
     container.config.unsplash_access_key.from_value(unsplash_access_key)
 
-    container.init_resources()
     unsplash_api = container.unsplash_api()
     assert unsplash_api is not None, "Unsplash API client not initialized"
     yield unsplash_api
-    await unsplash_api.client.aclose()  # Ensure the client is closed after tests
+    # close client after all tests
+    try:
+        await unsplash_api._client.aclose()
+    except RuntimeError as e:
+        if "Event loop is closed" not in str(e):
+            raise  # Ensure the client is closed after tests
