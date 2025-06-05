@@ -48,3 +48,33 @@ def test_api_topics():
     Test if the API topics endpoint is set in the environment variables.
     """
     assert os.getenv("API_TOPICS") is not None, "API_TOPICS environment variable not set"
+
+def test_photo_id():
+    """
+    Test if the photo ID is set in the environment variables.
+    """
+    assert os.getenv("TEST_PHOTO_ID") is not None, "PHOTO_ID environment variable not set"
+
+def test_collection_id():
+    """
+    Test if the collection ID is set in the environment variables.
+    """
+    assert os.getenv("TEST_COLLECTION_ID") is not None, "COLLECTION_ID environment variable not set"
+
+def test_user_username():
+    """
+    Test if the user username is set in the environment variables.
+    """
+    assert os.getenv("TEST_USER_USERNAME") is not None, "USER_USERNAME environment variable not set"
+
+def test_topic_id_or_slug():
+    """
+    Test if the topic ID or slug is set in the environment variables.
+    """
+    assert os.getenv("TEST_TOPIC_ID_OR_SLUG") is not None, "TOPIC_ID_OR_SLUG environment variable not set"
+
+def test_search_query():
+    """
+    Test if the search query is set in the environment variables.
+    """
+    assert os.getenv("TEST_SEARCH_QUERY") is not None, "SEARCH_QUERY environment variable not set"

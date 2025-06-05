@@ -24,3 +24,8 @@ API_HEADERS = {
     "Accept-Version": "v1",
     "Content-Type": "application/json"
 }
+TEST_PHOTO_ID = os.getenv("TEST_PHOTO_ID")
+TEST_COLLECTION_ID = os.getenv("TEST_COLLECTION_ID")
+TEST_USER_USERNAME = os.getenv("TEST_USER_USERNAME", "pawel_czerwinski")
+TEST_TOPIC_ID_OR_SLUG = os.getenv("TEST_TOPIC_ID_OR_SLUG", "wallpapers")
+TEST_SEARCH_QUERY = os.getenv("TEST_SEARCH_QUERY", "Taipei")
