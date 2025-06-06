@@ -5,7 +5,22 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def handle_api_call_exceptions(func):
+def handle_base_exceptions_async(func):
+    """
+    Decorator to handle base exceptions.
+    """
+    @functools.wraps(func)
+    async def wrapper(*args, **kwargs):
+        try:
+            return await func(*args, **kwargs)
+        except TypeError as e:
+            logger.error(f"Type error: {e}")
+        except Exception as e:
+            logger.exception(f"An unexpected error occurred: {e}")
+            return None
+    return wrapper
+
+def handle_api_call_exceptions_async(func):
     """
     Decorator to handle API call exceptions.
     """
@@ -19,12 +34,5 @@ def handle_api_call_exceptions(func):
             logger.error(f"HTTP error occurred: {e}")
         except ValueError as e:
             logger.error(f"JSON parsing error: {e}")
-        except TypeError as e:
-            logger.error(f"Type error: {e}")
-        except Exception as e:
-            logger.exception(f"An unexpected error occurred: {e}")
-        finally:
-            # Optionally, you can log the error or take other actions
-            logger.error("API call completed with errors.")
         return None
     return wrapper
