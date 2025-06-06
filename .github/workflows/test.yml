@@ -106,22 +106,47 @@ jobs:
           name: reports-${{ github.event.repository.name }}-${{ github.run_number }}
           path: test-reports
 
-      - name: Deploy reports to GitHub Pages
+      - name: Generate index.html for GitHub Pages
+        run: |
+          RUN_ID=${{ needs.test.outputs.RUN_ID }}
+          BASE_URL="https://lackary.github.io/apis-testing"
+
+          echo "<html><body>" > index.html
+          echo "<h1>Test Reports</h1>" >> index.html
+
+          echo "<h2>Allure Report</h2>" >> index.html
+          echo "<a href='${BASE_URL}/test-reports/allure/reports/report-${RUN_ID}/index.html'>Allure Report</a><br><br>" >> index.html
+
+          echo "<h2>Pytest HTML Report</h2>" >> index.html
+          echo "<a href='${BASE_URL}/test-reports/report-${RUN_ID}.html'>Pytest HTML</a><br><br>" >> index.html
+
+          echo "<h2>Coverage Report</h2>" >> index.html
+          echo "<a href='${BASE_URL}/test-reports/pytest-cov/cov-${RUN_ID}-html/index.html'>Coverage Report</a><br><br>" >> index.html
+
+          echo "</body></html>" >> index.html
+
+      - name: Prepare deploy-pages folder
+        run: |
+          mkdir -p deploy-pages
+          cp -r test-reports deploy-pages/
+          cp index.html deploy-pages/
+
+      - name: Deploy only index.html and test-reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./test-reports
+          publish_dir: ./deploy-pages
           publish_branch: gh-pages
           force_orphan: true
-          destination_dir: ${{ github.ref_name }}/test-reports
+          destination_dir: ""
 
       - name: Show deployed report URLs
         run: |
           echo "### Allure Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/allure/reports/report-${{ needs.test.outputs.RUN_ID  }}/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/test-reports/allure/reports/report-${{ needs.test.outputs.RUN_ID  }}/index.html" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Pytest HTML Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/report-${{ needs.test.outputs.RUN_ID  }}.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/test-reports/report-${{ needs.test.outputs.RUN_ID  }}.html" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Coverage Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/${{ github.ref_name }}/test-reports/pytest-cov/cov-${{ needs.test.outputs.RUN_ID  }}-html/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/test-reports/pytest-cov/cov-${{ needs.test.outputs.RUN_ID  }}-html/index.html" >> $GITHUB_STEP_SUMMARY
