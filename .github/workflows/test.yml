@@ -1,6 +1,9 @@
 name: pytest-testing
 
 on:
+  push:
+    branches: ["main"]
+    # tags: ["v*"] # Uncomment if you want to trigger on tags
   pull_request:
     branches: ["*"]
   schedule:
