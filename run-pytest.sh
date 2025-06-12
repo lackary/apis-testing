@@ -19,6 +19,7 @@ RUN_ID=$(date +"%Y%m%d_%H%M%S")
 # Run tests and generate both pytest-html and Allure result files
 pytest \
   --html=test-reports/report-${RUN_ID}.html \
+  --junitxml=test-reports/test-${RUN_ID}.xml \
   --self-contained-html \
   --alluredir=test-reports/allure/results/results-${RUN_ID} \
   --cov=src \
