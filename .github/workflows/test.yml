@@ -87,6 +87,14 @@ jobs:
           RUN_ID=$(echo "$RUN_OUTPUT" | tail -n 1)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_OUTPUT
 
+      - name: Publish JUnit Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Pytest JUnit Results
+          path: test-reports/test-${{ steps.run_pytest.outputs.RUN_ID }}.xml
+          reporter: java-junit
+
       - name: 📤 Upload test-reports folder
         uses: actions/upload-artifact@v4
         with:
