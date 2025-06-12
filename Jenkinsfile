@@ -6,18 +6,7 @@ pipeline {
     }
 
     environment {
-        API_URL = credentials('API_URL')
         UNSPLASH_ACCESS_KEY = credentials('UNSPLASH_ACCESS_KEY')
-        API_PHOTOS = credentials('API_PHOTOS')
-        API_COLLECTIONS = credentials('API_COLLECTIONS')
-        API_USERS = credentials('API_USERS')
-        API_SEARCH = credentials('API_SEARCH')
-        API_TOPICS = credentials('API_TOPICS')
-        TEST_PHOTO_ID = credentials('TEST_PHOTO_ID')
-        TEST_COLLECTION_ID = credentials('TEST_COLLECTION_ID')
-        TEST_USER_USERNAME = credentials('TEST_USER_USERNAME')
-        TEST_TOPIC_ID_OR_SLUG = credentials('TEST_TOPIC_ID_OR_SLUG')
-        TEST_SEARCH_QUERY = credentials('TEST_SEARCH_QUERY')
         // You can configure these Secret Text credentials in the Jenkins management interface
     }
 

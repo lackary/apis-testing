@@ -3,7 +3,8 @@ import os
 import requests
 from src.data.model.unsplash_data import *
 from src.utils.json_helper import *
-from config import API_URL, UNSPLASH_ACCESS_KEY, API_PHOTOS, API_COLLECTIONS, API_USERS, API_SEARCH, API_TOPICS
+from src.utils.constant import API_URL, API_PHOTOS, API_COLLECTIONS, API_USERS, API_SEARCH, API_TOPICS
+from config import UNSPLASH_ACCESS_KEY
 
 unsplash_headers = {
     "Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}",

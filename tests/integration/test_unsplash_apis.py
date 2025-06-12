@@ -1,7 +1,7 @@
 import pytest
 from src.data.remote.api_requests import *
-from config import API_COLLECTIONS, API_PHOTOS, API_USERS
-from config import TEST_PHOTO_ID, TEST_COLLECTION_ID, TEST_USER_USERNAME, TEST_TOPIC_ID_OR_SLUG, TEST_SEARCH_QUERY
+from src.utils.constant import API_COLLECTIONS, API_PHOTOS, API_USERS
+from src.utils.constant import TEST_PHOTO_ID, TEST_COLLECTION_ID, TEST_USER_USERNAME, TEST_TOPIC_ID_OR_SLUG, TEST_SEARCH_QUERY
 
 @pytest.mark.asyncio
 async def test_get_photos_async(unsplash_api):
