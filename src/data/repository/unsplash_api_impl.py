@@ -2,7 +2,7 @@ from httpx import AsyncClient
 from src.domain.repository.unsplash_api_interface import UnsplashApi
 from src.data.model.unsplash_data import UnsplashPhoto, UnsplashCollection, UnsplashUser, UnsplashTopic, UnsplashSearch
 from src.utils.decorators import handle_api_call_exceptions_async, handle_base_exceptions_async
-from config import API_PHOTOS, API_COLLECTIONS, API_USERS, API_SEARCH, API_TOPICS
+from src.utils.constant import API_PHOTOS, API_COLLECTIONS, API_USERS, API_SEARCH, API_TOPICS
 from src.utils.json_helper import parse_json
 import logging
 
