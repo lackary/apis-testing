@@ -91,6 +91,13 @@ class UnsplashPrevewPhoto:
     urls: UnsplashUrls
 
 @dataclass
+class UnsplashSponsorship:
+    impression_urls: Optional[List[str]] = field(default_factory=list)
+    tagline: Optional[str] = None
+    tagline_url: Optional[str] = None
+    sponsor: Optional[UnsplashUser] = None
+
+@dataclass
 class UnsplashPhoto(UnsplashPrevewPhoto):
     width: int
     height: int
@@ -103,7 +110,7 @@ class UnsplashPhoto(UnsplashPrevewPhoto):
     user: UnsplashUser
     description: Optional[str] = None
     promoted_at: Optional[str] = None
-    sponsorship: Optional[str] = None
+    sponsorship: Optional[UnsplashSponsorship] = None
 
 @dataclass
 class UnsplashCollection:
