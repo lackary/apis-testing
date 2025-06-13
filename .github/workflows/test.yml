@@ -83,6 +83,8 @@ jobs:
           name: Pytest JUnit Results
           path: test-reports/test-${{ steps.run_pytest.outputs.RUN_ID }}.xml
           reporter: java-junit
+          # Ensure the report is always published
+          fail-on-error: false
 
       - name: 📤 Upload test-reports folder
         uses: actions/upload-artifact@v4
