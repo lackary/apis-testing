@@ -67,7 +67,7 @@ if [[ ! -d "test-reports" ]] || [[ ! -d "test-reports/allure/results/results-${R
 fi
 
 # Check if the generated reports exist
-if [[ ! -f "test-reports/report-${RUN_ID}.html" ]] || [[ ! -d "test-reports/allure/reports/report-${RUN_ID}" ]]; then
+if [[ ! -f "test-reports/report-${RUN_ID}.html" ]] || [[ ! -f "test-reports/test-${RUN_ID}.xml" ]] || [[ ! -d "test-reports/allure/reports/report-${RUN_ID}" ]] || [[ ! -d "test-reports/pytest-cov/cov-${RUN_ID}-html" ]] then
   echo "❌ Generated reports do not exist."
   exit 1
 fi
@@ -77,6 +77,7 @@ echo "✅ All reports generated successfully."
 
 # Print the location of the generated reports
 echo "✅ Pytest-HTML: test-reports/report-${RUN_ID}.html"
+echo "✅ Pytest-XML: test-reports/test-${RUN_ID}.xml"
 echo "✅ Allure HTML: test-reports/allure/reports/report-${RUN_ID}"
 echo "✅ Coverage HTML: test-reports/pytest-cov/cov-${RUN_ID}-html"
 
