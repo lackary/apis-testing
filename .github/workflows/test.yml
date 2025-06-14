@@ -76,12 +76,15 @@ jobs:
           RUN_ID=$(echo "$RUN_OUTPUT" | tail -n 1)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_OUTPUT
 
+      - name: List test-reports files (recursive)
+        run: ls -lR test-reports
+
       - name: Publish JUnit Test Report
         uses: dorny/test-reporter@v1
         if: always()
         with:
           name: Pytest JUnit Results
-          path: test-reports/test-${{ steps.run_pytest.outputs.RUN_ID }}.xml
+          path: test-reports/test-${{ steps.run_pytest.outputs.run_id }}.xml
           reporter: java-junit
           # Ensure the report is always published
           fail-on-error: false
@@ -110,7 +113,7 @@ jobs:
 
       - name: Generate index.html for GitHub Pages
         run: |
-          RUN_ID=${{ needs.test.outputs.RUN_ID }}
+          RUN_ID=${{ needs.test.outputs.run_id }}
           BASE_URL="https://lackary.github.io/apis-testing"
 
           echo "<html><body>" > index.html
@@ -145,10 +148,10 @@ jobs:
       - name: Show deployed report URLs
         run: |
           echo "### Allure Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/test-reports/allure/reports/report-${{ needs.test.outputs.RUN_ID  }}/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/test-reports/allure/reports/report-${{ needs.test.outputs.run_id  }}/index.html" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Pytest HTML Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/test-reports/report-${{ needs.test.outputs.RUN_ID  }}.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/test-reports/report-${{ needs.test.outputs.run_id  }}.html" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Coverage Report URL" >> $GITHUB_STEP_SUMMARY
-          echo "https://lackary.github.io/apis-testing/test-reports/pytest-cov/cov-${{ needs.test.outputs.RUN_ID  }}-html/index.html" >> $GITHUB_STEP_SUMMARY
+          echo "https://lackary.github.io/apis-testing/test-reports/pytest-cov/cov-${{ needs.test.outputs.run_id  }}-html/index.html" >> $GITHUB_STEP_SUMMARY
