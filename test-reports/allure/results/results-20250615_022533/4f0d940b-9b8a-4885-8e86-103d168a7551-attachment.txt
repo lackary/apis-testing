@@ -1,0 +1,2 @@
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+ERROR    src.utils.decorators:decorators.py:36 JSON parsing error: bad value
