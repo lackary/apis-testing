@@ -1,0 +1,1 @@
+{"uuid": "c9b00240-70a0-433b-bb75-9f9cd817e917", "children": ["b648d186-f8f0-4935-ab6b-1c7cd9a382bd"], "befores": [{"name": "_function_event_loop", "status": "passed", "start": 1750471607639, "stop": 1750471607640}], "afters": [{"name": "_function_event_loop::0", "status": "passed", "start": 1750471607641, "stop": 1750471607641}], "start": 1750471607639, "stop": 1750471607641}

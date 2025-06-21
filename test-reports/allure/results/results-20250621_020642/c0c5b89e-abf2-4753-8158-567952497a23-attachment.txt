@@ -1,0 +1,19 @@
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fd00fb6b230>
+DEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=<ssl.SSLContext object at 0x7fd00fb46840> server_hostname='api.unsplash.com' timeout=5.0
+DEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fd00fcc7b10>
+DEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=<Request [b'GET']>
+DEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete
+DEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=<Request [b'GET']>
+DEBUG    httpcore.http11:_trace.py:87 send_request_body.complete
+DEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=<Request [b'GET']>
+DEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'4506'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1750471604&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=EHhppVL86nFi6Wsi5xMmeG2qwPmUiqpr%2BhUJ1z08o8o%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1750471604&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=EHhppVL86nFi6Wsi5xMmeG2qwPmUiqpr%2BhUJ1z08o8o%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=7519,stale-if-error=5089,stale-while-revalidate=71'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/photos?page=62113&per_page=5>; rel="last", <https://api.unsplash.com/photos?page=2&per_page=5>; rel="next"'), (b'X-Total', b'310564'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'2464c633d4fe4ccfca3a0b911989a5c008bb6c6d'), (b'Content-Language', b'en'), (b'Etag', b'W/"5a04494d6d37903f5ddb1442bae83a29"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'49'), (b'X-Request-Id', b'50fb05df-beb5-4887-be61-bd0b9d0379b4'), (b'X-Runtime', b'0.051825'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Sat, 21 Jun 2025 02:06:44 GMT'), (b'X-Served-By', b'cache-iad-kiad7000141-IAD'), (b'X-Cache', b'MISS'), (b'X-Cache-Hits', b'0'), (b'X-Timer', b'S1750471605.879884,VS0,VE64'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept')])
+INFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/photos?page=1&per_page=5 "HTTP/1.1 200 OK"
+DEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=<Request [b'GET']>
+DEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete
+DEBUG    httpcore.http11:_trace.py:87 response_closed.started
+DEBUG    httpcore.http11:_trace.py:87 response_closed.complete
+DEBUG    httpcore.connection:_trace.py:87 close.started
+DEBUG    httpcore.connection:_trace.py:87 close.complete

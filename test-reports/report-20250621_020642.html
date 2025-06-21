@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title id="head-title">report-20250621_020642.html</title>
+      <style type="text/css">body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  /* do not increase min-width as some may use split screens */
+  min-width: 800px;
+  color: #999;
+}
+
+h1 {
+  font-size: 24px;
+  color: black;
+}
+
+h2 {
+  font-size: 16px;
+  color: black;
+}
+
+p {
+  color: black;
+}
+
+a {
+  color: #999;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+#environment td {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  vertical-align: top;
+}
+#environment tr:nth-child(odd) {
+  background-color: #f6f6f6;
+}
+#environment ul {
+  margin: 0;
+  padding: 0 20px;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed,
+.passed .col-result {
+  color: green;
+}
+
+span.skipped,
+span.xfailed,
+span.rerun,
+.skipped .col-result,
+.xfailed .col-result,
+.rerun .col-result {
+  color: orange;
+}
+
+span.error,
+span.failed,
+span.xpassed,
+.error .col-result,
+.failed .col-result,
+.xpassed .col-result {
+  color: red;
+}
+
+.col-links__extra {
+  margin-right: 3px;
+}
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+#results-table {
+  border: 1px solid #e6e6e6;
+  color: #999;
+  font-size: 12px;
+  width: 100%;
+}
+#results-table th,
+#results-table td {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  text-align: left;
+}
+#results-table th {
+  font-weight: bold;
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+.logwrapper {
+  max-height: 230px;
+  overflow-y: scroll;
+  background-color: #e6e6e6;
+}
+.logwrapper.expanded {
+  max-height: none;
+}
+.logwrapper.expanded .logexpander:after {
+  content: "collapse [-]";
+}
+.logwrapper .logexpander {
+  z-index: 1;
+  position: sticky;
+  top: 10px;
+  width: max-content;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 5px 7px;
+  margin: 10px 0 10px calc(100% - 80px);
+  cursor: pointer;
+  background-color: #e6e6e6;
+}
+.logwrapper .logexpander:after {
+  content: "expand [+]";
+}
+.logwrapper .logexpander:hover {
+  color: #000;
+  border-color: #000;
+}
+.logwrapper .log {
+  min-height: 40px;
+  position: relative;
+  top: -50px;
+  height: calc(100% + 50px);
+  border: 1px solid #e6e6e6;
+  color: black;
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  padding: 5px;
+  padding-right: 80px;
+  white-space: pre-wrap;
+}
+
+div.media {
+  border: 1px solid #e6e6e6;
+  float: right;
+  height: 240px;
+  margin: 0 5px;
+  overflow: hidden;
+  width: 320px;
+}
+
+.media-container {
+  display: grid;
+  grid-template-columns: 25px auto 25px;
+  align-items: center;
+  flex: 1 1;
+  overflow: hidden;
+  height: 200px;
+}
+
+.media-container--fullscreen {
+  grid-template-columns: 0px auto 0px;
+}
+
+.media-container__nav--right,
+.media-container__nav--left {
+  text-align: center;
+  cursor: pointer;
+}
+
+.media-container__viewport {
+  cursor: pointer;
+  text-align: center;
+  height: inherit;
+}
+.media-container__viewport img,
+.media-container__viewport video {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+}
+
+.media__name,
+.media__counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 0 0 25px;
+  align-items: center;
+}
+
+.collapsible td:not(.col-links) {
+  cursor: pointer;
+}
+.collapsible td:not(.col-links):hover::after {
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.col-result {
+  width: 130px;
+}
+.col-result:hover::after {
+  content: " (hide details)";
+}
+
+.col-result.collapsed:hover::after {
+  content: " (show details)";
+}
+
+#environment-header h2:hover::after {
+  content: " (hide details)";
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#environment-header.collapsed h2:hover::after {
+  content: " (show details)";
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+  cursor: pointer;
+}
+.sortable.desc:after {
+  content: " ";
+  position: relative;
+  left: 5px;
+  bottom: -12.5px;
+  border: 10px solid #4caf50;
+  border-bottom: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.sortable.asc:after {
+  content: " ";
+  position: relative;
+  left: 5px;
+  bottom: 12.5px;
+  border: 10px solid #4caf50;
+  border-top: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+.hidden, .summary__reload__button.hidden {
+  display: none;
+}
+
+.summary__data {
+  flex: 0 0 550px;
+}
+.summary__reload {
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+}
+.summary__reload__button {
+  flex: 0 0 300px;
+  display: flex;
+  color: white;
+  font-weight: bold;
+  background-color: #4caf50;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.summary__reload__button:hover {
+  background-color: #46a049;
+}
+.summary__spacer {
+  flex: 0 0 550px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters,
+.collapse {
+  display: flex;
+  align-items: center;
+}
+.filters button,
+.collapse button {
+  color: #999;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.filters button:hover,
+.collapse button:hover {
+  color: #ccc;
+}
+
+.filter__label {
+  margin-right: 10px;
+}
+
+      </style>
+    
+  </head>
+  <body>
+    <h1 id="title">report-20250621_020642.html</h1>
+    <p>Report generated on 21-Jun-2025 at 02:06:47 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a>
+        v4.1.1</p>
+    <div id="environment-header">
+      <h2>Environment</h2>
+    </div>
+    <table id="environment"></table>
+    <!-- TEMPLATES -->
+      <template id="template_environment_row">
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </template>
+    <template id="template_results-table__body--empty">
+      <tbody class="results-table-row">
+        <tr id="not-found-message">
+          <td colspan="4">No results found. Check the filters.</th>
+        </tr>
+    </template>
+    <template id="template_results-table__tbody">
+      <tbody class="results-table-row">
+        <tr class="collapsible">
+        </tr>
+        <tr class="extras-row">
+          <td class="extra" colspan="4">
+            <div class="extraHTML"></div>
+            <div class="media">
+              <div class="media-container">
+                  <div class="media-container__nav--left"><</div>
+                  <div class="media-container__viewport">
+                    <img src="" />
+                    <video controls>
+                      <source src="" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="media-container__nav--right">></div>
+                </div>
+                <div class="media__name"></div>
+                <div class="media__counter"></div>
+            </div>
+            <div class="logwrapper">
+              <div class="logexpander"></div>
+              <div class="log"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </template>
+    <!-- END TEMPLATES -->
+    <div class="summary">
+      <div class="summary__data">
+        <h2>Summary</h2>
+        <div class="additional-summary prefix">
+        </div>
+        <p class="run-count">52 tests took 00:00:03.</p>
+        <p class="filter">(Un)check the boxes to filter the results.</p>
+        <div class="summary__reload">
+          <div class="summary__reload__button hidden" onclick="location.reload()">
+            <div>There are still tests running. <br />Reload this page to get the latest results!</div>
+          </div>
+        </div>
+        <div class="summary__spacer"></div>
+        <div class="controls">
+          <div class="filters">
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="failed" disabled/>
+            <span class="failed">0 Failed,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="passed" />
+            <span class="passed">52 Passed,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="skipped" />
+            <span class="skipped">13 Skipped,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="xfailed" disabled/>
+            <span class="xfailed">0 Expected failures,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="xpassed" disabled/>
+            <span class="xpassed">0 Unexpected passes,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="error" disabled/>
+            <span class="error">0 Errors,</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="rerun" disabled/>
+            <span class="rerun">0 Reruns</span>
+          </div>
+          <div class="collapse">
+            <button id="show_all_details">Show all details</button>&nbsp;/&nbsp;<button id="hide_all_details">Hide all details</button>
+          </div>
+        </div>
+      </div>
+      <div class="additional-summary summary">
+      </div>
+      <div class="additional-summary postfix">
+      </div>
+    </div>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable" data-column-type="result">Result</th>
+          <th class="sortable" data-column-type="testId">Test</th>
+          <th class="sortable" data-column-type="duration">Duration</th>
+          <th>Links</th>
+        </tr>
+      </thead>
+    </table>
+  </body>
+  <footer>
+    <div id="data-container" data-jsonblob="{&#34;environment&#34;: {&#34;Python&#34;: &#34;3.13.3&#34;, &#34;Platform&#34;: &#34;Linux-6.11.0-1015-azure-x86_64-with-glibc2.39&#34;, &#34;Packages&#34;: {&#34;pytest&#34;: &#34;8.3.5&#34;, &#34;pluggy&#34;: &#34;1.6.0&#34;}, &#34;Plugins&#34;: {&#34;html&#34;: &#34;4.1.1&#34;, &#34;metadata&#34;: &#34;3.1.1&#34;, &#34;asyncio&#34;: &#34;1.0.0&#34;, &#34;anyio&#34;: &#34;4.9.0&#34;, &#34;cov&#34;: &#34;6.1.1&#34;, &#34;allure-pytest&#34;: &#34;2.14.2&#34;}, &#34;CI&#34;: &#34;true&#34;, &#34;JAVA_HOME&#34;: &#34;/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.15-6/x64&#34;}, &#34;tests&#34;: {&#34;tests/integration/test_unsplash_apis.py::test_get_photos_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_photos_async&#34;, &#34;duration&#34;: &#34;371 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_photos_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;371 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00fb6b230&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00fb46840&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00fcc7b10&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;4506&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471604&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=EHhppVL86nFi6Wsi5xMmeG2qwPmUiqpr%2BhUJ1z08o8o%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471604&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=EHhppVL86nFi6Wsi5xMmeG2qwPmUiqpr%2BhUJ1z08o8o%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=7519,stale-if-error=5089,stale-while-revalidate=71&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/photos?page=62113&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/photos?page=2&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;310564&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;5a04494d6d37903f5ddb1442bae83a29&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;49&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;50fb05df-beb5-4887-be61-bd0b9d0379b4&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.051825&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:44 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000141-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471605.879884,VS0,VE64&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/photos?page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_photo_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_photo_async&#34;, &#34;duration&#34;: &#34;151 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_photo_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;151 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7339d0&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00fb47770&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7fd940&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;4713&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=3837,stale-if-error=5331,stale-while-revalidate=81&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;7aaa6450591a4a26d19bb1ca3502b32d&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;48&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;5ff7e1b8-697b-4c36-becc-ba2814b0e83b&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.085184&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:45 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000157-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471605.014507,VS0,VE96&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/photos/4ICax0QMs8U &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_collections_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_collections_async&#34;, &#34;duration&#34;: &#34;116 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_collections_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;116 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7fe2c0&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00fb47e30&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f790170&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;7813&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=8744,stale-if-error=4801,stale-while-revalidate=75&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/collections?page=315&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/collections?page=2&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;1575&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;0ece80ab7e0e656e0fc4a98b2a14571f&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;47&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;e1d136f9-e6f7-4a63-b8df-5292230de71c&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.044400&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:45 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000039-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471605.168056,VS0,VE56&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/collections?page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_collection_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_collection_async&#34;, &#34;duration&#34;: &#34;94 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_collection_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;94 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f79e690&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00fb47920&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f79c270&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;2063&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=10205,stale-if-error=4986,stale-while-revalidate=62&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;5dcfa7b744f33ab1891e4bcc03607fe0&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;46&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;399b3d14-4021-4ae7-b811-9b0e398b870f&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.030582&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:45 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000090-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471605.285665,VS0,VE40&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/collections/8961198 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_collection_photos_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_collection_photos_async&#34;, &#34;duration&#34;: &#34;123 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_collection_photos_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;123 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f750950&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00fb47ad0&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f750150&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;3856&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=8165,stale-if-error=5187,stale-while-revalidate=71&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/collections/8961198/photos?page=97&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/collections/8961198/photos?page=2&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;485&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;a4735bc17ba5b1a2c2f533a492652db2&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;45&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;aae1aff8-66fc-493b-9ddb-c73a96749fb0&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.032481&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:45 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000081-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471605.404015,VS0,VE46&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/collections/8961198/photos?page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_user_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_user_async&#34;, &#34;duration&#34;: &#34;117 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_user_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;117 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f73a6c0&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00fb47890&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f739b80&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;1439&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=7601,stale-if-error=4306,stale-while-revalidate=77&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;9958e4b0b31e3196b20cbd3c9da7a6f9&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;44&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;9f91eed6-0a31-4dab-8c2d-edc2c7ddde1e&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.042533&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:45 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000104-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.508966,VS0,VE62&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/users/pawel_czerwinski &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_user_photos_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_user_photos_async&#34;, &#34;duration&#34;: &#34;103 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_user_photos_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;103 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f765a90&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00fb47e30&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f765ef0&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;3039&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=9347,stale-if-error=4761,stale-while-revalidate=68&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/users/pawel_czerwinski/photos?page=431&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/users/pawel_czerwinski/photos?page=2&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;2153&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;0fc859a95c24c6f396a3b3e2ffbac37e&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;43&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;86813714-d056-4f8d-994d-b08a9872b9bd&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.042533&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:45 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000041-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.620269,VS0,VE54&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/users/pawel_czerwinski/photos?page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_user_collections_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_user_collections_async&#34;, &#34;duration&#34;: &#34;99 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_user_collections_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;99 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f779640&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00f80c710&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7a9250&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;6092&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=9296,stale-if-error=4352,stale-while-revalidate=75&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/users/pawel_czerwinski/collections?page=2&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/users/pawel_czerwinski/collections?page=2&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;8&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;dedb62798aec0158a5b909717fe8e6a3&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;42&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;2e39a677-0a71-484c-a9c9-f3692c97db11&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.038910&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:45 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000110-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.724783,VS0,VE49&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/users/pawel_czerwinski/collections?page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_topics_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_topics_async&#34;, &#34;duration&#34;: &#34;174 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_topics_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;174 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7a8f50&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00f80cb90&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7e3b70&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;7723&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=9664,stale-if-error=3900,stale-while-revalidate=62&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/topics?page=5&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/topics?page=2&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;21&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;aa2e6239a6cecdf7eede17d68bb733b5&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;41&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;56087d59-b8f4-4ff2-9182-3013eb440d5a&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.107210&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:45 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000133-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.830905,VS0,VE119&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/topics?page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_topic_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_topic_async&#34;, &#34;duration&#34;: &#34;96 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_topic_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;96 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f799860&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00f80d640&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7a3d90&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;3838&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471605&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=FY7HF6LvgMYT4lmT6pnVYbxBzfKsxRXpJHGFae0h8UM%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=9226,stale-if-error=5091,stale-while-revalidate=82&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;945d765ed0c0841e0272d02b1a740323&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;40&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;b742b2f3-87d3-43c0-a0b3-d757a4bd931e&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.039733&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:46 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000154-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.003132,VS0,VE49&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/topics/wallpapers &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_topic_photos_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_topic_photos_async&#34;, &#34;duration&#34;: &#34;176 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_topic_photos_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;176 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f74f890&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00f80d5b0&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00fb47800&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;4537&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471606&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=sVON6101cENAl7sW8y91A2ohfJlRpTBDuwtm5L%2Bw0vY%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471606&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=sVON6101cENAl7sW8y91A2ohfJlRpTBDuwtm5L%2Bw0vY%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=7648,stale-if-error=4371,stale-while-revalidate=67&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/topics/wallpapers/photos?page=3139&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/topics/wallpapers/photos?page=2&amp;amp;per_page=5&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;15695&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;2256c09cc2fee2899916e3aeb78ec3c0&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;39&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;0cadbbbf-0eef-4253-b166-ce346282f8bd&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.116837&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:46 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000116-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.103045,VS0,VE126&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/topics/wallpapers/photos?page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_search_photos_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_search_photos_async&#34;, &#34;duration&#34;: &#34;51 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_search_photos_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;51 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f742150&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00f80cf80&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f742650&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;4052&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750385367&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=f3Kdi%2BuU%2FQI6%2FZaLN61Xh21TiycMu%2BhpJRSUdXSdWso%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750385367&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=f3Kdi%2BuU%2FQI6%2FZaLN61Xh21TiycMu%2BhpJRSUdXSdWso%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=122474,stale-if-error=4415,stale-while-revalidate=78&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Warning&amp;#x27;, b&amp;#x27;The tags property in this endpoint is deprecated. https://changelog.unsplash.com/deprecations/2021/07/12/tags-search-deprecation.html&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/search/photos?page=856&amp;amp;per_page=5&amp;amp;query=Taipei&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/search/photos?page=2&amp;amp;per_page=5&amp;amp;query=Taipei&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;4277&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2c7ed74d53278d1013ddfe9f7fe238f0ca471432&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;5e6171c52f244defd0d09400228aa89e&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;37&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;5e109293-2b3e-4930-9a9a-fafa7f046c40&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.046366&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;86239&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:46 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000169-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;HIT&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.280981,VS0,VE2&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/search/photos?query=Taipei&amp;amp;page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_search_collections_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_search_collections_async&#34;, &#34;duration&#34;: &#34;56 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_search_collections_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;56 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7bdef0&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00f80c680&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7bd630&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;7312&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750385367&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=f3Kdi%2BuU%2FQI6%2FZaLN61Xh21TiycMu%2BhpJRSUdXSdWso%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750385367&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=f3Kdi%2BuU%2FQI6%2FZaLN61Xh21TiycMu%2BhpJRSUdXSdWso%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=94516,stale-if-error=3947,stale-while-revalidate=62&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/search/collections?page=610&amp;amp;per_page=5&amp;amp;query=Taipei&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/search/collections?page=2&amp;amp;per_page=5&amp;amp;query=Taipei&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;3047&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2c7ed74d53278d1013ddfe9f7fe238f0ca471432&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;fc55871b523a94006d1caec455b7def7&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;36&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;829068c1-5b5d-40b8-8a44-5934f3d81cd8&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.085722&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;86238&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:46 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000078-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;HIT&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.336041,VS0,VE2&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/search/collections?query=Taipei&amp;amp;page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_search_users_async&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_search_users_async&#34;, &#34;duration&#34;: &#34;171 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_search_users_async&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;171 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host=&amp;#x27;api.unsplash.com&amp;#x27; port=443 local_address=None timeout=5.0 socket_options=None\nDEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f796e70&amp;gt;\nDEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=&amp;lt;ssl.SSLContext object at 0x7fd00f80df40&amp;gt; server_hostname=&amp;#x27;api.unsplash.com&amp;#x27; timeout=5.0\nDEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=&amp;lt;httpcore._backends.anyio.AnyIOStream object at 0x7fd00f7957f0&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 send_request_body.complete\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b&amp;#x27;HTTP/1.1&amp;#x27;, 200, b&amp;#x27;OK&amp;#x27;, [(b&amp;#x27;Connection&amp;#x27;, b&amp;#x27;keep-alive&amp;#x27;), (b&amp;#x27;Content-Length&amp;#x27;, b&amp;#x27;3642&amp;#x27;), (b&amp;#x27;Server&amp;#x27;, b&amp;#x27;Cowboy&amp;#x27;), (b&amp;#x27;Report-To&amp;#x27;, b&amp;#x27;{&amp;quot;group&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;endpoints&amp;quot;:[{&amp;quot;url&amp;quot;:&amp;quot;https://nel.heroku.com/reports?ts=1750471606&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=sVON6101cENAl7sW8y91A2ohfJlRpTBDuwtm5L%2Bw0vY%3D&amp;quot;}]}&amp;#x27;), (b&amp;#x27;Reporting-Endpoints&amp;#x27;, b&amp;#x27;heroku-nel=https://nel.heroku.com/reports?ts=1750471606&amp;amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;amp;s=sVON6101cENAl7sW8y91A2ohfJlRpTBDuwtm5L%2Bw0vY%3D&amp;#x27;), (b&amp;#x27;Nel&amp;#x27;, b&amp;#x27;{&amp;quot;report_to&amp;quot;:&amp;quot;heroku-nel&amp;quot;,&amp;quot;max_age&amp;quot;:3600,&amp;quot;success_fraction&amp;quot;:0.005,&amp;quot;failure_fraction&amp;quot;:0.05,&amp;quot;response_headers&amp;quot;:[&amp;quot;Via&amp;quot;]}&amp;#x27;), (b&amp;#x27;Content-Type&amp;#x27;, b&amp;#x27;application/json&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Origin&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Methods&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Allow-Headers&amp;#x27;, b&amp;#x27;*&amp;#x27;), (b&amp;#x27;Access-Control-Expose-Headers&amp;#x27;, b&amp;#x27;Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining&amp;#x27;), (b&amp;#x27;Cache-Control&amp;#x27;, b&amp;#x27;max-age=117321,stale-if-error=5094,stale-while-revalidate=69&amp;#x27;), (b&amp;#x27;X-Unsplash-Version&amp;#x27;, b&amp;#x27;v1&amp;#x27;), (b&amp;#x27;Link&amp;#x27;, b&amp;#x27;&amp;lt;https://api.unsplash.com/search/users?page=79&amp;amp;per_page=5&amp;amp;query=Taipei&amp;gt;; rel=&amp;quot;last&amp;quot;, &amp;lt;https://api.unsplash.com/search/users?page=2&amp;amp;per_page=5&amp;amp;query=Taipei&amp;gt;; rel=&amp;quot;next&amp;quot;&amp;#x27;), (b&amp;#x27;X-Total&amp;#x27;, b&amp;#x27;394&amp;#x27;), (b&amp;#x27;X-Per-Page&amp;#x27;, b&amp;#x27;5&amp;#x27;), (b&amp;#x27;X-Powered-By&amp;#x27;, b&amp;#x27;hero-app&amp;#x27;), (b&amp;#x27;X-Version&amp;#x27;, b&amp;#x27;2464c633d4fe4ccfca3a0b911989a5c008bb6c6d&amp;#x27;), (b&amp;#x27;Content-Language&amp;#x27;, b&amp;#x27;en&amp;#x27;), (b&amp;#x27;Etag&amp;#x27;, b&amp;#x27;W/&amp;quot;96c1df6aee4ab8bfd41527370e0e933e&amp;quot;&amp;#x27;), (b&amp;#x27;X-Ratelimit-Limit&amp;#x27;, b&amp;#x27;50&amp;#x27;), (b&amp;#x27;X-Ratelimit-Remaining&amp;#x27;, b&amp;#x27;38&amp;#x27;), (b&amp;#x27;X-Request-Id&amp;#x27;, b&amp;#x27;3817117a-7f27-46c9-8942-70b5a7a69395&amp;#x27;), (b&amp;#x27;X-Runtime&amp;#x27;, b&amp;#x27;0.105152&amp;#x27;), (b&amp;#x27;Content-Encoding&amp;#x27;, b&amp;#x27;gzip&amp;#x27;), (b&amp;#x27;Strict-Transport-Security&amp;#x27;, b&amp;#x27;max-age=63072000; includeSubDomains&amp;#x27;), (b&amp;#x27;Via&amp;#x27;, b&amp;#x27;1.1 vegur, 1.1 varnish&amp;#x27;), (b&amp;#x27;Accept-Ranges&amp;#x27;, b&amp;#x27;bytes&amp;#x27;), (b&amp;#x27;Age&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;Date&amp;#x27;, b&amp;#x27;Sat, 21 Jun 2025 02:06:46 GMT&amp;#x27;), (b&amp;#x27;X-Served-By&amp;#x27;, b&amp;#x27;cache-iad-kiad7000096-IAD&amp;#x27;), (b&amp;#x27;X-Cache&amp;#x27;, b&amp;#x27;MISS&amp;#x27;), (b&amp;#x27;X-Cache-Hits&amp;#x27;, b&amp;#x27;0&amp;#x27;), (b&amp;#x27;X-Timer&amp;#x27;, b&amp;#x27;S1750471606.396857,VS0,VE115&amp;#x27;), (b&amp;#x27;Vary&amp;#x27;, b&amp;#x27;Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept&amp;#x27;)])\nINFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/search/users?query=Taipei&amp;amp;page=1&amp;amp;per_page=5 &amp;quot;HTTP/1.1 200 OK&amp;quot;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=&amp;lt;Request [b&amp;#x27;GET&amp;#x27;]&amp;gt;\nDEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete\nDEBUG    httpcore.http11:_trace.py:87 response_closed.started\nDEBUG    httpcore.http11:_trace.py:87 response_closed.complete\n\n---------------------------- Captured log teardown -----------------------------\nDEBUG    httpcore.connection:_trace.py:87 close.started\nDEBUG    httpcore.connection:_trace.py:87 close.complete&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_photos&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_photos::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_photos::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 129, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_photo&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_photo::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_photo::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 134, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_collections&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_collections::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_collections::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 139, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_collection&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_collection::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_collection::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 144, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_user&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_user::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_user::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 151, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_user_photos&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_user_photos::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_user_photos::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 158, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_user_collections&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_user_collections::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_user_collections::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 167, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_search_photos&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_search_photos::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_search_photos::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 177, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_search_collections&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_search_collections::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_search_collections::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 186, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_search_users&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_search_users::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_search_users::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 196, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_topics&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_topics::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_topics::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 205, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_topic&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_topic::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_topic::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 216, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis.py::test_get_topic_photos&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Skipped&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis.py::test_get_topic_photos::setup&#34;, &#34;duration&#34;: &#34;0 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Skipped&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis.py::test_get_topic_photos::setup&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;0 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;(&amp;#x27;/home/runner/work/apis-testing/apis-testing/tests/integration/test_unsplash_apis.py&amp;#x27;, 224, &amp;#x27;Skipped: discarded due to using async&amp;#x27;)\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_photos_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_photos_api&#34;, &#34;duration&#34;: &#34;113 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_photos_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;113 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /photos HTTP/1.1&amp;quot; 200 8229\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_photo_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_photo_api&#34;, &#34;duration&#34;: &#34;20 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_photo_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;20 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /photos/4ICax0QMs8U HTTP/1.1&amp;quot; 200 4713\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_collections_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_collections_api&#34;, &#34;duration&#34;: &#34;89 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_collections_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;89 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /collections HTTP/1.1&amp;quot; 200 14554\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_collection_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_collection_api&#34;, &#34;duration&#34;: &#34;16 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_collection_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;16 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /collections/8961198 HTTP/1.1&amp;quot; 200 2063\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_user_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_user_api&#34;, &#34;duration&#34;: &#34;31 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_user_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;31 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /users/pawel_czerwinski HTTP/1.1&amp;quot; 200 1439\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_user_photos_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_user_photos_api&#34;, &#34;duration&#34;: &#34;111 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_user_photos_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;111 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /users/pawel_czerwinski/photos HTTP/1.1&amp;quot; 200 5355\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_user_collections_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_user_collections_api&#34;, &#34;duration&#34;: &#34;74 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_user_collections_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;74 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /users/pawel_czerwinski/collections HTTP/1.1&amp;quot; 200 8876\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_search_photos_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_search_photos_api&#34;, &#34;duration&#34;: &#34;25 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_search_photos_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;25 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /search/photos?query=Taipei&amp;amp;per_page=5 HTTP/1.1&amp;quot; 200 4053\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_search_collections_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_search_collections_api&#34;, &#34;duration&#34;: &#34;26 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_search_collections_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;26 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /search/collections?query=Taipei&amp;amp;per_page=5 HTTP/1.1&amp;quot; 200 7312\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_search_users_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_search_users_api&#34;, &#34;duration&#34;: &#34;70 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_search_users_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;70 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /search/users?query=Taipei&amp;amp;per_page=5 HTTP/1.1&amp;quot; 200 3642\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_topics_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_topics_api&#34;, &#34;duration&#34;: &#34;75 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_topics_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;75 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /topics HTTP/1.1&amp;quot; 200 14205\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_topic_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_topic_api&#34;, &#34;duration&#34;: &#34;19 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_topic_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;19 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /topics/wallpapers HTTP/1.1&amp;quot; 200 3838\n\n&#34;}], &#34;tests/integration/test_unsplash_apis_status.py::test_get_topic_photos_api&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_apis_status.py::test_get_topic_photos_api&#34;, &#34;duration&#34;: &#34;146 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_apis_status.py::test_get_topic_photos_api&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;146 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /topics/wallpapers/photos HTTP/1.1&amp;quot; 200 8153\n\n&#34;}], &#34;tests/integration/test_unsplash_status_code.py::test_fake_404&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_status_code.py::test_fake_404&#34;, &#34;duration&#34;: &#34;5 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_status_code.py::test_fake_404&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;5 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\nINFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/not-found &amp;quot;HTTP/1.1 404 Not Found&amp;quot;\n\n&#34;}], &#34;tests/integration/test_unsplash_status_code.py::test_server_bad_request&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_status_code.py::test_server_bad_request&#34;, &#34;duration&#34;: &#34;47 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_status_code.py::test_server_bad_request&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;47 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /search/photos HTTP/1.1&amp;quot; 400 None\n\n&#34;}], &#34;tests/integration/test_unsplash_status_code.py::test_server_unauthorized&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_status_code.py::test_server_unauthorized&#34;, &#34;duration&#34;: &#34;31 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_status_code.py::test_server_unauthorized&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;31 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /photos?Authorization=Client-ID+2cZ-w6P4DbX0jVJ7wNONYH_Re7tjInRcXJI8LEH1yGY HTTP/1.1&amp;quot; 401 None\n\n&#34;}], &#34;tests/integration/test_unsplash_status_code.py::test_server_not_found&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/integration/test_unsplash_status_code.py::test_server_not_found&#34;, &#34;duration&#34;: &#34;28 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/integration/test_unsplash_status_code.py::test_server_not_found&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;28 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nDEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443\nDEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 &amp;quot;GET /not-found HTTP/1.1&amp;quot; 404 50\n\n&#34;}], &#34;tests/test_env.py::test_unsplash_access_key&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/test_env.py::test_unsplash_access_key&#34;, &#34;duration&#34;: &#34;1 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/test_env.py::test_unsplash_access_key&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;1 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;No log output captured.&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_photos_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_photos_success&#34;, &#34;duration&#34;: &#34;7 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_photos_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;7 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_photo_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_photo_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_photo_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collections_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collections_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collections_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collection_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collection_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collection_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collection_photos_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collection_photos_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_collection_photos_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_photos_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_photos_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_photos_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_collections_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_collections_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_user_collections_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topics_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topics_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topics_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topic_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topic_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topic_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topic_photos_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topic_photos_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_topic_photos_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_search_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_search_success&#34;, &#34;duration&#34;: &#34;6 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_search_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;6 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_search_invalid_category&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_search_invalid_category&#34;, &#34;duration&#34;: &#34;5 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/data/repository/test_unsplash_api_impl.py::test_get_search_invalid_category&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;5 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nERROR    src.utils.decorators:decorators.py:36 JSON parsing error: Unknown category\n\n&#34;}], &#34;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_type_error&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_type_error&#34;, &#34;duration&#34;: &#34;4 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_type_error&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;4 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nERROR    src.utils.decorators:decorators.py:17 Type error: type error!\n\n&#34;}], &#34;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_other_exception&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_other_exception&#34;, &#34;duration&#34;: &#34;4 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_other_exception&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;4 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nERROR    src.utils.decorators:decorators.py:19 An unexpected error occurred: runtime error!\nTraceback (most recent call last):\n  File &amp;quot;/home/runner/work/apis-testing/apis-testing/src/utils/decorators.py&amp;quot;, line 15, in wrapper\n    return await func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File &amp;quot;/home/runner/work/apis-testing/apis-testing/tests/unit/utils/test_decorator.py&amp;quot;, line 19, in func\n    raise RuntimeError(&amp;quot;runtime error!&amp;quot;)\nRuntimeError: runtime error!\n\n&#34;}], &#34;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_success&#34;, &#34;duration&#34;: &#34;2 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/utils/test_decorator.py::test_handle_base_exceptions_async_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;2 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}], &#34;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_request_error&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_request_error&#34;, &#34;duration&#34;: &#34;3 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_request_error&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;3 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nERROR    src.utils.decorators:decorators.py:32 API call failed: request failed\n\n&#34;}], &#34;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_http_status_error&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_http_status_error&#34;, &#34;duration&#34;: &#34;3 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_http_status_error&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;3 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nERROR    src.utils.decorators:decorators.py:34 HTTP error occurred: bad status\n\n&#34;}], &#34;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_value_error&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_value_error&#34;, &#34;duration&#34;: &#34;3 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_value_error&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;3 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n\n------------------------------ Captured log call -------------------------------\nERROR    src.utils.decorators:decorators.py:36 JSON parsing error: bad value\n\n&#34;}], &#34;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_success&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_success&#34;, &#34;duration&#34;: &#34;4 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/unit/utils/test_decorator.py::test_handle_api_call_exceptions_async_success&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;4 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log setup ------------------------------\nDEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector\n&#34;}]}, &#34;renderCollapsed&#34;: [&#34;passed&#34;], &#34;initialSort&#34;: &#34;result&#34;, &#34;title&#34;: &#34;report-20250621_020642.html&#34;}"></div>
+    <script>
+      (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const { getCollapsedCategory, setCollapsedIds } = require('./storage.js')
+
+class DataManager {
+    setManager(data) {
+        const collapsedCategories = [...getCollapsedCategory(data.renderCollapsed)]
+        const collapsedIds = []
+        const tests = Object.values(data.tests).flat().map((test, index) => {
+            const collapsed = collapsedCategories.includes(test.result.toLowerCase())
+            const id = `test_${index}`
+            if (collapsed) {
+                collapsedIds.push(id)
+            }
+            return {
+                ...test,
+                id,
+                collapsed,
+            }
+        })
+        const dataBlob = { ...data, tests }
+        this.data = { ...dataBlob }
+        this.renderData = { ...dataBlob }
+        setCollapsedIds(collapsedIds)
+    }
+
+    get allData() {
+        return { ...this.data }
+    }
+
+    resetRender() {
+        this.renderData = { ...this.data }
+    }
+
+    setRender(data) {
+        this.renderData.tests = [...data]
+    }
+
+    toggleCollapsedItem(id) {
+        this.renderData.tests = this.renderData.tests.map((test) =>
+            test.id === id ? { ...test, collapsed: !test.collapsed } : test,
+        )
+    }
+
+    set allCollapsed(collapsed) {
+        this.renderData = { ...this.renderData, tests: [...this.renderData.tests.map((test) => (
+            { ...test, collapsed }
+        ))] }
+    }
+
+    get testSubset() {
+        return [...this.renderData.tests]
+    }
+
+    get environment() {
+        return this.renderData.environment
+    }
+
+    get initialSort() {
+        return this.data.initialSort
+    }
+}
+
+module.exports = {
+    manager: new DataManager(),
+}
+
+},{"./storage.js":8}],2:[function(require,module,exports){
+const mediaViewer = require('./mediaviewer.js')
+const templateEnvRow = document.getElementById('template_environment_row')
+const templateResult = document.getElementById('template_results-table__tbody')
+
+function htmlToElements(html) {
+    const temp = document.createElement('template')
+    temp.innerHTML = html
+    return temp.content.childNodes
+}
+
+const find = (selector, elem) => {
+    if (!elem) {
+        elem = document
+    }
+    return elem.querySelector(selector)
+}
+
+const findAll = (selector, elem) => {
+    if (!elem) {
+        elem = document
+    }
+    return [...elem.querySelectorAll(selector)]
+}
+
+const dom = {
+    getStaticRow: (key, value) => {
+        const envRow = templateEnvRow.content.cloneNode(true)
+        const isObj = typeof value === 'object' && value !== null
+        const values = isObj ? Object.keys(value).map((k) => `${k}: ${value[k]}`) : null
+
+        const valuesElement = htmlToElements(
+            values ? `<ul>${values.map((val) => `<li>${val}</li>`).join('')}<ul>` : `<div>${value}</div>`)[0]
+        const td = findAll('td', envRow)
+        td[0].textContent = key
+        td[1].appendChild(valuesElement)
+
+        return envRow
+    },
+    getResultTBody: ({ testId, id, log, extras, resultsTableRow, tableHtml, result, collapsed }) => {
+        const resultBody = templateResult.content.cloneNode(true)
+        resultBody.querySelector('tbody').classList.add(result.toLowerCase())
+        resultBody.querySelector('tbody').id = testId
+        resultBody.querySelector('.collapsible').dataset.id = id
+
+        resultsTableRow.forEach((html) => {
+            const t = document.createElement('template')
+            t.innerHTML = html
+            resultBody.querySelector('.collapsible').appendChild(t.content)
+        })
+
+        if (log) {
+            // Wrap lines starting with "E" with span.error to color those lines red
+            const wrappedLog = log.replace(/^E.*$/gm, (match) => `<span class="error">${match}</span>`)
+            resultBody.querySelector('.log').innerHTML = wrappedLog
+        } else {
+            resultBody.querySelector('.log').remove()
+        }
+
+        if (collapsed) {
+            resultBody.querySelector('.collapsible > td')?.classList.add('collapsed')
+            resultBody.querySelector('.extras-row').classList.add('hidden')
+        } else {
+            resultBody.querySelector('.collapsible > td')?.classList.remove('collapsed')
+        }
+
+        const media = []
+        extras?.forEach(({ name, format_type, content }) => {
+            if (['image', 'video'].includes(format_type)) {
+                media.push({ path: content, name, format_type })
+            }
+
+            if (format_type === 'html') {
+                resultBody.querySelector('.extraHTML').insertAdjacentHTML('beforeend', `<div>${content}</div>`)
+            }
+        })
+        mediaViewer.setup(resultBody, media)
+
+        // Add custom html from the pytest_html_results_table_html hook
+        tableHtml?.forEach((item) => {
+            resultBody.querySelector('td[class="extra"]').insertAdjacentHTML('beforeend', item)
+        })
+
+        return resultBody
+    },
+}
+
+module.exports = {
+    dom,
+    htmlToElements,
+    find,
+    findAll,
+}
+
+},{"./mediaviewer.js":6}],3:[function(require,module,exports){
+const { manager } = require('./datamanager.js')
+const { doSort } = require('./sort.js')
+const storageModule = require('./storage.js')
+
+const getFilteredSubSet = (filter) =>
+    manager.allData.tests.filter(({ result }) => filter.includes(result.toLowerCase()))
+
+const doInitFilter = () => {
+    const currentFilter = storageModule.getVisible()
+    const filteredSubset = getFilteredSubSet(currentFilter)
+    manager.setRender(filteredSubset)
+}
+
+const doFilter = (type, show) => {
+    if (show) {
+        storageModule.showCategory(type)
+    } else {
+        storageModule.hideCategory(type)
+    }
+
+    const currentFilter = storageModule.getVisible()
+    const filteredSubset = getFilteredSubSet(currentFilter)
+    manager.setRender(filteredSubset)
+
+    const sortColumn = storageModule.getSort()
+    doSort(sortColumn, true)
+}
+
+module.exports = {
+    doFilter,
+    doInitFilter,
+}
+
+},{"./datamanager.js":1,"./sort.js":7,"./storage.js":8}],4:[function(require,module,exports){
+const { redraw, bindEvents, renderStatic } = require('./main.js')
+const { doInitFilter } = require('./filter.js')
+const { doInitSort } = require('./sort.js')
+const { manager } = require('./datamanager.js')
+const data = JSON.parse(document.getElementById('data-container').dataset.jsonblob)
+
+function init() {
+    manager.setManager(data)
+    doInitFilter()
+    doInitSort()
+    renderStatic()
+    redraw()
+    bindEvents()
+}
+
+init()
+
+},{"./datamanager.js":1,"./filter.js":3,"./main.js":5,"./sort.js":7}],5:[function(require,module,exports){
+const { dom, find, findAll } = require('./dom.js')
+const { manager } = require('./datamanager.js')
+const { doSort } = require('./sort.js')
+const { doFilter } = require('./filter.js')
+const {
+    getVisible,
+    getCollapsedIds,
+    setCollapsedIds,
+    getSort,
+    getSortDirection,
+    possibleFilters,
+} = require('./storage.js')
+
+const removeChildren = (node) => {
+    while (node.firstChild) {
+        node.removeChild(node.firstChild)
+    }
+}
+
+const renderStatic = () => {
+    const renderEnvironmentTable = () => {
+        const environment = manager.environment
+        const rows = Object.keys(environment).map((key) => dom.getStaticRow(key, environment[key]))
+        const table = document.getElementById('environment')
+        removeChildren(table)
+        rows.forEach((row) => table.appendChild(row))
+    }
+    renderEnvironmentTable()
+}
+
+const addItemToggleListener = (elem) => {
+    elem.addEventListener('click', ({ target }) => {
+        const id = target.parentElement.dataset.id
+        manager.toggleCollapsedItem(id)
+
+        const collapsedIds = getCollapsedIds()
+        if (collapsedIds.includes(id)) {
+            const updated = collapsedIds.filter((item) => item !== id)
+            setCollapsedIds(updated)
+        } else {
+            collapsedIds.push(id)
+            setCollapsedIds(collapsedIds)
+        }
+        redraw()
+    })
+}
+
+const renderContent = (tests) => {
+    const sortAttr = getSort(manager.initialSort)
+    const sortAsc = JSON.parse(getSortDirection())
+    const rows = tests.map(dom.getResultTBody)
+    const table = document.getElementById('results-table')
+    const tableHeader = document.getElementById('results-table-head')
+
+    const newTable = document.createElement('table')
+    newTable.id = 'results-table'
+
+    // remove all sorting classes and set the relevant
+    findAll('.sortable', tableHeader).forEach((elem) => elem.classList.remove('asc', 'desc'))
+    tableHeader.querySelector(`.sortable[data-column-type="${sortAttr}"]`)?.classList.add(sortAsc ? 'desc' : 'asc')
+    newTable.appendChild(tableHeader)
+
+    if (!rows.length) {
+        const emptyTable = document.getElementById('template_results-table__body--empty').content.cloneNode(true)
+        newTable.appendChild(emptyTable)
+    } else {
+        rows.forEach((row) => {
+            if (!!row) {
+                findAll('.collapsible td:not(.col-links', row).forEach(addItemToggleListener)
+                find('.logexpander', row).addEventListener('click',
+                    (evt) => evt.target.parentNode.classList.toggle('expanded'),
+                )
+                newTable.appendChild(row)
+            }
+        })
+    }
+
+    table.replaceWith(newTable)
+}
+
+const renderDerived = () => {
+    const currentFilter = getVisible()
+    possibleFilters.forEach((result) => {
+        const input = document.querySelector(`input[data-test-result="${result}"]`)
+        input.checked = currentFilter.includes(result)
+    })
+}
+
+const bindEvents = () => {
+    const filterColumn = (evt) => {
+        const { target: element } = evt
+        const { testResult } = element.dataset
+
+        doFilter(testResult, element.checked)
+        const collapsedIds = getCollapsedIds()
+        const updated = manager.renderData.tests.map((test) => {
+            return {
+                ...test,
+                collapsed: collapsedIds.includes(test.id),
+            }
+        })
+        manager.setRender(updated)
+        redraw()
+    }
+
+    const header = document.getElementById('environment-header')
+    header.addEventListener('click', () => {
+        const table = document.getElementById('environment')
+        table.classList.toggle('hidden')
+        header.classList.toggle('collapsed')
+    })
+
+    findAll('input[name="filter_checkbox"]').forEach((elem) => {
+        elem.addEventListener('click', filterColumn)
+    })
+
+    findAll('.sortable').forEach((elem) => {
+        elem.addEventListener('click', (evt) => {
+            const { target: element } = evt
+            const { columnType } = element.dataset
+            doSort(columnType)
+            redraw()
+        })
+    })
+
+    document.getElementById('show_all_details').addEventListener('click', () => {
+        manager.allCollapsed = false
+        setCollapsedIds([])
+        redraw()
+    })
+    document.getElementById('hide_all_details').addEventListener('click', () => {
+        manager.allCollapsed = true
+        const allIds = manager.renderData.tests.map((test) => test.id)
+        setCollapsedIds(allIds)
+        redraw()
+    })
+}
+
+const redraw = () => {
+    const { testSubset } = manager
+
+    renderContent(testSubset)
+    renderDerived()
+}
+
+module.exports = {
+    redraw,
+    bindEvents,
+    renderStatic,
+}
+
+},{"./datamanager.js":1,"./dom.js":2,"./filter.js":3,"./sort.js":7,"./storage.js":8}],6:[function(require,module,exports){
+class MediaViewer {
+    constructor(assets) {
+        this.assets = assets
+        this.index = 0
+    }
+
+    nextActive() {
+        this.index = this.index === this.assets.length - 1 ? 0 : this.index + 1
+        return [this.activeFile, this.index]
+    }
+
+    prevActive() {
+        this.index = this.index === 0 ? this.assets.length - 1 : this.index -1
+        return [this.activeFile, this.index]
+    }
+
+    get currentIndex() {
+        return this.index
+    }
+
+    get activeFile() {
+        return this.assets[this.index]
+    }
+}
+
+
+const setup = (resultBody, assets) => {
+    if (!assets.length) {
+        resultBody.querySelector('.media').classList.add('hidden')
+        return
+    }
+
+    const mediaViewer = new MediaViewer(assets)
+    const container = resultBody.querySelector('.media-container')
+    const leftArrow = resultBody.querySelector('.media-container__nav--left')
+    const rightArrow = resultBody.querySelector('.media-container__nav--right')
+    const mediaName = resultBody.querySelector('.media__name')
+    const counter = resultBody.querySelector('.media__counter')
+    const imageEl = resultBody.querySelector('img')
+    const sourceEl = resultBody.querySelector('source')
+    const videoEl = resultBody.querySelector('video')
+
+    const setImg = (media, index) => {
+        if (media?.format_type === 'image') {
+            imageEl.src = media.path
+
+            imageEl.classList.remove('hidden')
+            videoEl.classList.add('hidden')
+        } else if (media?.format_type === 'video') {
+            sourceEl.src = media.path
+
+            videoEl.classList.remove('hidden')
+            imageEl.classList.add('hidden')
+        }
+
+        mediaName.innerText = media?.name
+        counter.innerText = `${index + 1} / ${assets.length}`
+    }
+    setImg(mediaViewer.activeFile, mediaViewer.currentIndex)
+
+    const moveLeft = () => {
+        const [media, index] = mediaViewer.prevActive()
+        setImg(media, index)
+    }
+    const doRight = () => {
+        const [media, index] = mediaViewer.nextActive()
+        setImg(media, index)
+    }
+    const openImg = () => {
+        window.open(mediaViewer.activeFile.path, '_blank')
+    }
+    if (assets.length === 1) {
+        container.classList.add('media-container--fullscreen')
+    } else {
+        leftArrow.addEventListener('click', moveLeft)
+        rightArrow.addEventListener('click', doRight)
+    }
+    imageEl.addEventListener('click', openImg)
+}
+
+module.exports = {
+    setup,
+}
+
+},{}],7:[function(require,module,exports){
+const { manager } = require('./datamanager.js')
+const storageModule = require('./storage.js')
+
+const genericSort = (list, key, ascending, customOrder) => {
+    let sorted
+    if (customOrder) {
+        sorted = list.sort((a, b) => {
+            const aValue = a.result.toLowerCase()
+            const bValue = b.result.toLowerCase()
+
+            const aIndex = customOrder.findIndex((item) => item.toLowerCase() === aValue)
+            const bIndex = customOrder.findIndex((item) => item.toLowerCase() === bValue)
+
+            // Compare the indices to determine the sort order
+            return aIndex - bIndex
+        })
+    } else {
+        sorted = list.sort((a, b) => a[key] === b[key] ? 0 : a[key] > b[key] ? 1 : -1)
+    }
+
+    if (ascending) {
+        sorted.reverse()
+    }
+    return sorted
+}
+
+const durationSort = (list, ascending) => {
+    const parseDuration = (duration) => {
+        if (duration.includes(':')) {
+            // If it's in the format "HH:mm:ss"
+            const [hours, minutes, seconds] = duration.split(':').map(Number)
+            return (hours * 3600 + minutes * 60 + seconds) * 1000
+        } else {
+            // If it's in the format "nnn ms"
+            return parseInt(duration)
+        }
+    }
+    const sorted = list.sort((a, b) => parseDuration(a['duration']) - parseDuration(b['duration']))
+    if (ascending) {
+        sorted.reverse()
+    }
+    return sorted
+}
+
+const doInitSort = () => {
+    const type = storageModule.getSort(manager.initialSort)
+    const ascending = storageModule.getSortDirection()
+    const list = manager.testSubset
+    const initialOrder = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed', 'Skipped', 'Passed']
+
+    storageModule.setSort(type)
+    storageModule.setSortDirection(ascending)
+
+    if (type?.toLowerCase() === 'original') {
+        manager.setRender(list)
+    } else {
+        let sortedList
+        switch (type) {
+        case 'duration':
+            sortedList = durationSort(list, ascending)
+            break
+        case 'result':
+            sortedList = genericSort(list, type, ascending, initialOrder)
+            break
+        default:
+            sortedList = genericSort(list, type, ascending)
+            break
+        }
+        manager.setRender(sortedList)
+    }
+}
+
+const doSort = (type, skipDirection) => {
+    const newSortType = storageModule.getSort(manager.initialSort) !== type
+    const currentAsc = storageModule.getSortDirection()
+    let ascending
+    if (skipDirection) {
+        ascending = currentAsc
+    } else {
+        ascending = newSortType ? false : !currentAsc
+    }
+    storageModule.setSort(type)
+    storageModule.setSortDirection(ascending)
+
+    const list = manager.testSubset
+    const sortedList = type === 'duration' ? durationSort(list, ascending) : genericSort(list, type, ascending)
+    manager.setRender(sortedList)
+}
+
+module.exports = {
+    doInitSort,
+    doSort,
+}
+
+},{"./datamanager.js":1,"./storage.js":8}],8:[function(require,module,exports){
+const possibleFilters = [
+    'passed',
+    'skipped',
+    'failed',
+    'error',
+    'xfailed',
+    'xpassed',
+    'rerun',
+]
+
+const getVisible = () => {
+    const url = new URL(window.location.href)
+    const settings = new URLSearchParams(url.search).get('visible')
+    const lower = (item) => {
+        const lowerItem = item.toLowerCase()
+        if (possibleFilters.includes(lowerItem)) {
+            return lowerItem
+        }
+        return null
+    }
+    return settings === null ?
+        possibleFilters :
+        [...new Set(settings?.split(',').map(lower).filter((item) => item))]
+}
+
+const hideCategory = (categoryToHide) => {
+    const url = new URL(window.location.href)
+    const visibleParams = new URLSearchParams(url.search).get('visible')
+    const currentVisible = visibleParams ? visibleParams.split(',') : [...possibleFilters]
+    const settings = [...new Set(currentVisible)].filter((f) => f !== categoryToHide).join(',')
+
+    url.searchParams.set('visible', settings)
+    window.history.pushState({}, null, unescape(url.href))
+}
+
+const showCategory = (categoryToShow) => {
+    if (typeof window === 'undefined') {
+        return
+    }
+    const url = new URL(window.location.href)
+    const currentVisible = new URLSearchParams(url.search).get('visible')?.split(',').filter(Boolean) ||
+        [...possibleFilters]
+    const settings = [...new Set([categoryToShow, ...currentVisible])]
+    const noFilter = possibleFilters.length === settings.length || !settings.length
+
+    noFilter ? url.searchParams.delete('visible') : url.searchParams.set('visible', settings.join(','))
+    window.history.pushState({}, null, unescape(url.href))
+}
+
+const getSort = (initialSort) => {
+    const url = new URL(window.location.href)
+    let sort = new URLSearchParams(url.search).get('sort')
+    if (!sort) {
+        sort = initialSort || 'result'
+    }
+    return sort
+}
+
+const setSort = (type) => {
+    const url = new URL(window.location.href)
+    url.searchParams.set('sort', type)
+    window.history.pushState({}, null, unescape(url.href))
+}
+
+const getCollapsedCategory = (renderCollapsed) => {
+    let categories
+    if (typeof window !== 'undefined') {
+        const url = new URL(window.location.href)
+        const collapsedItems = new URLSearchParams(url.search).get('collapsed')
+        switch (true) {
+        case !renderCollapsed && collapsedItems === null:
+            categories = ['passed']
+            break
+        case collapsedItems?.length === 0 || /^["']{2}$/.test(collapsedItems):
+            categories = []
+            break
+        case /^all$/.test(collapsedItems) || collapsedItems === null && /^all$/.test(renderCollapsed):
+            categories = [...possibleFilters]
+            break
+        default:
+            categories = collapsedItems?.split(',').map((item) => item.toLowerCase()) || renderCollapsed
+            break
+        }
+    } else {
+        categories = []
+    }
+    return categories
+}
+
+const getSortDirection = () => JSON.parse(sessionStorage.getItem('sortAsc')) || false
+const setSortDirection = (ascending) => sessionStorage.setItem('sortAsc', ascending)
+
+const getCollapsedIds = () => JSON.parse(sessionStorage.getItem('collapsedIds')) || []
+const setCollapsedIds = (list) => sessionStorage.setItem('collapsedIds', JSON.stringify(list))
+
+module.exports = {
+    getVisible,
+    hideCategory,
+    showCategory,
+    getCollapsedIds,
+    setCollapsedIds,
+    getSort,
+    setSort,
+    getSortDirection,
+    setSortDirection,
+    getCollapsedCategory,
+    possibleFilters,
+}
+
+},{}]},{},[4]);
+    </script>
+  </footer>
+</html>
