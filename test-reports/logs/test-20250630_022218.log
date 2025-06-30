@@ -1,0 +1,320 @@
+2025-06-30 02:22:20.786 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:20.786 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:21.014 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:21.132 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723c730e0>
+2025-06-30 02:22:21.132 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723c4e7b0> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:21.149 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723dd79d0>
+2025-06-30 02:22:21.149 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.150 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:21.150 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.150 - DEBUG - send_request_body.complete
+2025-06-30 02:22:21.150 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.234 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'4201'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=7608,stale-if-error=3967,stale-while-revalidate=83'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/photos?page=62139&per_page=5>; rel="last", <https://api.unsplash.com/photos?page=2&per_page=5>; rel="next"'), (b'X-Total', b'310691'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"65a493b15ea7a713230e90038e5f8b3a"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'49'), (b'X-Request-Id', b'4a56f1a2-0cbc-44f9-936a-e74e14481e74'), (b'X-Runtime', b'0.058270'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:21 GMT'), (b'X-Served-By', b'cache-iad-kcgs7200137-IAD, cache-nyc-kteb1890055-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250141.155123,VS0,VE76'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept')])
+2025-06-30 02:22:21.235 - INFO - HTTP Request: GET https://api.unsplash.com/photos?page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:21.235 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.236 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:21.236 - DEBUG - response_closed.started
+2025-06-30 02:22:21.236 - DEBUG - response_closed.complete
+2025-06-30 02:22:21.251 - DEBUG - close.started
+2025-06-30 02:22:21.251 - DEBUG - close.complete
+2025-06-30 02:22:21.256 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:21.281 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:21.293 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723837890>
+2025-06-30 02:22:21.293 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723c4fda0> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:21.310 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723901a70>
+2025-06-30 02:22:21.310 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.311 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:21.311 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.311 - DEBUG - send_request_body.complete
+2025-06-30 02:22:21.311 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.446 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'4097'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=5069,stale-if-error=4761,stale-while-revalidate=69'), (b'X-Unsplash-Version', b'v1'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"90dcde154b260c75191846e93eb5b085"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'48'), (b'X-Request-Id', b'32495f9f-28c9-4ec7-a95f-889f720a798d'), (b'X-Runtime', b'0.108603'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:21 GMT'), (b'X-Served-By', b'cache-iad-kjyo7100137-IAD, cache-nyc-kteb1890030-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250141.315396,VS0,VE127'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,Accept')])
+2025-06-30 02:22:21.447 - INFO - HTTP Request: GET https://api.unsplash.com/photos/4ICax0QMs8U "HTTP/1.1 200 OK"
+2025-06-30 02:22:21.447 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.447 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:21.448 - DEBUG - response_closed.started
+2025-06-30 02:22:21.448 - DEBUG - response_closed.complete
+2025-06-30 02:22:21.450 - DEBUG - close.started
+2025-06-30 02:22:21.450 - DEBUG - close.complete
+2025-06-30 02:22:21.454 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:21.479 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:21.491 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87239023f0>
+2025-06-30 02:22:21.491 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723c4fc80> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:21.509 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723c7fad0>
+2025-06-30 02:22:21.509 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.510 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:21.510 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.510 - DEBUG - send_request_body.complete
+2025-06-30 02:22:21.510 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.591 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'7778'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=9649,stale-if-error=4333,stale-while-revalidate=64'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/collections?page=315&per_page=5>; rel="last", <https://api.unsplash.com/collections?page=2&per_page=5>; rel="next"'), (b'X-Total', b'1575'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"7e2431c1c428958260a449a9fb76cb42"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'47'), (b'X-Request-Id', b'f3f2f6c2-2d2f-476d-a4cf-379e64c1b377'), (b'X-Runtime', b'0.055627'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:21 GMT'), (b'X-Served-By', b'cache-iad-kiad7000096-IAD, cache-nyc-kteb1890056-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250142.514559,VS0,VE73'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,Accept')])
+2025-06-30 02:22:21.591 - INFO - HTTP Request: GET https://api.unsplash.com/collections?page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:21.592 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.593 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:21.593 - DEBUG - response_closed.started
+2025-06-30 02:22:21.593 - DEBUG - response_closed.complete
+2025-06-30 02:22:21.599 - DEBUG - close.started
+2025-06-30 02:22:21.599 - DEBUG - close.complete
+2025-06-30 02:22:21.603 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:21.628 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:21.638 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f872385e8b0>
+2025-06-30 02:22:21.638 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723c4f800> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:21.654 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f872385c270>
+2025-06-30 02:22:21.655 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.655 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:21.655 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.655 - DEBUG - send_request_body.complete
+2025-06-30 02:22:21.656 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.730 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'2061'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=8374,stale-if-error=4370,stale-while-revalidate=84'), (b'X-Unsplash-Version', b'v1'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"33c25c424c4f7a4a254b7d944d86ec34"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'46'), (b'X-Request-Id', b'699750db-f483-42ce-8d52-07247a124fed'), (b'X-Runtime', b'0.050869'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:21 GMT'), (b'X-Served-By', b'cache-iad-kcgs7200029-IAD, cache-nyc-kteb1890097-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250142.660080,VS0,VE67'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,Accept')])
+2025-06-30 02:22:21.731 - INFO - HTTP Request: GET https://api.unsplash.com/collections/8961198 "HTTP/1.1 200 OK"
+2025-06-30 02:22:21.731 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.732 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:21.732 - DEBUG - response_closed.started
+2025-06-30 02:22:21.732 - DEBUG - response_closed.complete
+2025-06-30 02:22:21.734 - DEBUG - close.started
+2025-06-30 02:22:21.735 - DEBUG - close.complete
+2025-06-30 02:22:21.739 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:21.767 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:21.777 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723854250>
+2025-06-30 02:22:21.777 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723c4ff50> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:21.797 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723854450>
+2025-06-30 02:22:21.798 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.798 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:21.798 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.798 - DEBUG - send_request_body.complete
+2025-06-30 02:22:21.798 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.879 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'3843'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=10241,stale-if-error=4485,stale-while-revalidate=63'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/collections/8961198/photos?page=97&per_page=5>; rel="last", <https://api.unsplash.com/collections/8961198/photos?page=2&per_page=5>; rel="next"'), (b'X-Total', b'485'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"605a5fd04fc8854b01391910fc4bfe4d"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'45'), (b'X-Request-Id', b'0a61bbc3-ba1e-4a27-b3c5-39977b9122ba'), (b'X-Runtime', b'0.038856'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:21 GMT'), (b'X-Served-By', b'cache-iad-kcgs7200026-IAD, cache-nyc-kteb1890040-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250142.803187,VS0,VE62'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept')])
+2025-06-30 02:22:21.880 - INFO - HTTP Request: GET https://api.unsplash.com/collections/8961198/photos?page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:21.880 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.880 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:21.881 - DEBUG - response_closed.started
+2025-06-30 02:22:21.881 - DEBUG - response_closed.complete
+2025-06-30 02:22:21.884 - DEBUG - close.started
+2025-06-30 02:22:21.885 - DEBUG - close.complete
+2025-06-30 02:22:21.889 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:21.913 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:21.926 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f872383a7b0>
+2025-06-30 02:22:21.927 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723c4f770> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:21.942 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723839c70>
+2025-06-30 02:22:21.942 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:21.943 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:21.943 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:21.943 - DEBUG - send_request_body.complete
+2025-06-30 02:22:21.943 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.113 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'1437'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250141&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=qGgViMjEy5PLAfySmhozbe%2BUq5I5dfE8rRStrf%2BM3fU%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=8013,stale-if-error=5001,stale-while-revalidate=74'), (b'X-Unsplash-Version', b'v1'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"9cd14753c12d58b3c5fb8daa07cbe2de"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'44'), (b'X-Request-Id', b'0fde544d-d6fd-4d06-b10c-020eabc179d6'), (b'X-Runtime', b'0.147838'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:22 GMT'), (b'X-Served-By', b'cache-iad-kjyo7100100-IAD, cache-nyc-kteb1890085-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250142.947512,VS0,VE162'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,Accept')])
+2025-06-30 02:22:22.113 - INFO - HTTP Request: GET https://api.unsplash.com/users/pawel_czerwinski "HTTP/1.1 200 OK"
+2025-06-30 02:22:22.113 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.114 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:22.114 - DEBUG - response_closed.started
+2025-06-30 02:22:22.114 - DEBUG - response_closed.complete
+2025-06-30 02:22:22.116 - DEBUG - close.started
+2025-06-30 02:22:22.116 - DEBUG - close.complete
+2025-06-30 02:22:22.120 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:22.145 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:22.156 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723865c50>
+2025-06-30 02:22:22.156 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723c4fc80> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:22.172 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87238660b0>
+2025-06-30 02:22:22.172 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.173 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:22.173 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.173 - DEBUG - send_request_body.complete
+2025-06-30 02:22:22.173 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.228 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'3371'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=7692,stale-if-error=4084,stale-while-revalidate=70'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/users/pawel_czerwinski/photos?page=431&per_page=5>; rel="last", <https://api.unsplash.com/users/pawel_czerwinski/photos?page=2&per_page=5>; rel="next"'), (b'X-Total', b'2153'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"af2098aba71c12c8a21d7be15d925ce3"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'43'), (b'X-Request-Id', b'6744f3e6-1042-4a48-8e7b-d388c8395efd'), (b'X-Runtime', b'0.032774'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:22 GMT'), (b'X-Served-By', b'cache-iad-kcgs7200079-IAD, cache-nyc-kteb1890087-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250142.177258,VS0,VE48'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept')])
+2025-06-30 02:22:22.229 - INFO - HTTP Request: GET https://api.unsplash.com/users/pawel_czerwinski/photos?page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:22.229 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.230 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:22.230 - DEBUG - response_closed.started
+2025-06-30 02:22:22.230 - DEBUG - response_closed.complete
+2025-06-30 02:22:22.234 - DEBUG - close.started
+2025-06-30 02:22:22.234 - DEBUG - close.complete
+2025-06-30 02:22:22.238 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:22.262 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:22.281 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723885230>
+2025-06-30 02:22:22.281 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723914c20> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:22.298 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f872384d550>
+2025-06-30 02:22:22.298 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.298 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:22.298 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.299 - DEBUG - send_request_body.complete
+2025-06-30 02:22:22.299 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.419 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'6097'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=9799,stale-if-error=4528,stale-while-revalidate=71'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/users/pawel_czerwinski/collections?page=2&per_page=5>; rel="last", <https://api.unsplash.com/users/pawel_czerwinski/collections?page=2&per_page=5>; rel="next"'), (b'X-Total', b'8'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"ba907e1e24139a2d7d7117d9be9c349b"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'42'), (b'X-Request-Id', b'079782ce-7e9a-41e2-8024-78054be84f60'), (b'X-Runtime', b'0.085941'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:22 GMT'), (b'X-Served-By', b'cache-iad-kcgs7200156-IAD, cache-nyc-kteb1890066-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250142.302844,VS0,VE113'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,Accept')])
+2025-06-30 02:22:22.419 - INFO - HTTP Request: GET https://api.unsplash.com/users/pawel_czerwinski/collections?page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:22.420 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.421 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:22.421 - DEBUG - response_closed.started
+2025-06-30 02:22:22.421 - DEBUG - response_closed.complete
+2025-06-30 02:22:22.427 - DEBUG - close.started
+2025-06-30 02:22:22.427 - DEBUG - close.complete
+2025-06-30 02:22:22.431 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:22.456 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:22.477 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f872384d250>
+2025-06-30 02:22:22.477 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f87239143b0> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:22.493 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87238e7cd0>
+2025-06-30 02:22:22.493 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.493 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:22.494 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.494 - DEBUG - send_request_body.complete
+2025-06-30 02:22:22.494 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.595 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'7494'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=9811,stale-if-error=3933,stale-while-revalidate=63'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/topics?page=5&per_page=5>; rel="last", <https://api.unsplash.com/topics?page=2&per_page=5>; rel="next"'), (b'X-Total', b'22'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"6ff36b55deafd7654e440105f26270e2"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'41'), (b'X-Request-Id', b'c1fdca52-525d-40b3-b5d6-bcb7a0ce26da'), (b'X-Runtime', b'0.073525'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:22 GMT'), (b'X-Served-By', b'cache-iad-kiad7000132-IAD, cache-nyc-kteb1890086-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250142.498436,VS0,VE93'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,Accept')])
+2025-06-30 02:22:22.595 - INFO - HTTP Request: GET https://api.unsplash.com/topics?page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:22.596 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.597 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:22.597 - DEBUG - response_closed.started
+2025-06-30 02:22:22.597 - DEBUG - response_closed.complete
+2025-06-30 02:22:22.602 - DEBUG - close.started
+2025-06-30 02:22:22.603 - DEBUG - close.complete
+2025-06-30 02:22:22.607 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:22.632 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:22.643 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87238a49f0>
+2025-06-30 02:22:22.643 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723915910> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:22.659 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87238b2df0>
+2025-06-30 02:22:22.660 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.660 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:22.660 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.660 - DEBUG - send_request_body.complete
+2025-06-30 02:22:22.660 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.711 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'3602'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=8664,stale-if-error=4418,stale-while-revalidate=69'), (b'X-Unsplash-Version', b'v1'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"e399b2a25484266a11bc8dd2e1be754e"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'40'), (b'X-Request-Id', b'382633c7-d27c-4919-9c36-e40ab448626e'), (b'X-Runtime', b'0.026054'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:22 GMT'), (b'X-Served-By', b'cache-iad-kjyo7100043-IAD, cache-nyc-kteb1890091-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250143.664724,VS0,VE44'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,Accept')])
+2025-06-30 02:22:22.712 - INFO - HTTP Request: GET https://api.unsplash.com/topics/wallpapers "HTTP/1.1 200 OK"
+2025-06-30 02:22:22.712 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.713 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:22.713 - DEBUG - response_closed.started
+2025-06-30 02:22:22.713 - DEBUG - response_closed.complete
+2025-06-30 02:22:22.715 - DEBUG - close.started
+2025-06-30 02:22:22.716 - DEBUG - close.complete
+2025-06-30 02:22:22.720 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:22.745 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:22.762 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f872385aa30>
+2025-06-30 02:22:22.762 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723915760> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:22.777 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723c4fb60>
+2025-06-30 02:22:22.777 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.778 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:22.778 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.778 - DEBUG - send_request_body.complete
+2025-06-30 02:22:22.778 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.921 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'4389'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250142&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=ci9YkY9If09ulohs5iWS3w6v8zTvwiSW7Szqvjw89Nc%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=8605,stale-if-error=4947,stale-while-revalidate=61'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/topics/wallpapers/photos?page=3141&per_page=5>; rel="last", <https://api.unsplash.com/topics/wallpapers/photos?page=2&per_page=5>; rel="next"'), (b'X-Total', b'15704'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"a0a8bd6313f6f5504273461a5a7ce26d"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'39'), (b'X-Request-Id', b'edeac5a7-04b3-4b7c-b7dd-a741a77fc4f3'), (b'X-Runtime', b'0.117747'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:22 GMT'), (b'X-Served-By', b'cache-iad-kcgs7200059-IAD, cache-nyc-kteb1890041-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250143.782943,VS0,VE135'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept')])
+2025-06-30 02:22:22.921 - INFO - HTTP Request: GET https://api.unsplash.com/topics/wallpapers/photos?page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:22.922 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.922 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:22.922 - DEBUG - response_closed.started
+2025-06-30 02:22:22.923 - DEBUG - response_closed.complete
+2025-06-30 02:22:22.926 - DEBUG - close.started
+2025-06-30 02:22:22.927 - DEBUG - close.complete
+2025-06-30 02:22:22.931 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:22.955 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:22.981 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87238ac1d0>
+2025-06-30 02:22:22.981 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723915250> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:22.998 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87238addd0>
+2025-06-30 02:22:22.998 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:22.998 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:22.999 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:22.999 - DEBUG - send_request_body.complete
+2025-06-30 02:22:22.999 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:23.069 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'4061'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250143&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=V9H%2B35z8zmY45VC8YMN4PWKzCvOweRQp5uCKQqgvcgU%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250143&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=V9H%2B35z8zmY45VC8YMN4PWKzCvOweRQp5uCKQqgvcgU%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=103834,stale-if-error=5014,stale-while-revalidate=83'), (b'X-Unsplash-Version', b'v1'), (b'Warning', b'The tags property in this endpoint is deprecated. https://changelog.unsplash.com/deprecations/2021/07/12/tags-search-deprecation.html'), (b'Link', b'<https://api.unsplash.com/search/photos?page=856&per_page=5&query=Taipei>; rel="last", <https://api.unsplash.com/search/photos?page=2&per_page=5&query=Taipei>; rel="next"'), (b'X-Total', b'4279'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"a628f61aeb600cf29f473481b099a52d"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'38'), (b'X-Request-Id', b'302988c4-41af-4692-8593-650aac60de2c'), (b'X-Runtime', b'0.044053'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:23 GMT'), (b'X-Served-By', b'cache-iad-kcgs7200156-IAD, cache-nyc-kteb1890020-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250143.003294,VS0,VE63'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept')])
+2025-06-30 02:22:23.070 - INFO - HTTP Request: GET https://api.unsplash.com/search/photos?query=Taipei&page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:23.070 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:23.071 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:23.071 - DEBUG - response_closed.started
+2025-06-30 02:22:23.071 - DEBUG - response_closed.complete
+2025-06-30 02:22:23.075 - DEBUG - close.started
+2025-06-30 02:22:23.075 - DEBUG - close.complete
+2025-06-30 02:22:23.079 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:23.104 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:23.139 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723891ef0>
+2025-06-30 02:22:23.140 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723914dd0> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:23.156 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8723891400>
+2025-06-30 02:22:23.156 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:23.157 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:23.157 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:23.157 - DEBUG - send_request_body.complete
+2025-06-30 02:22:23.157 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:23.173 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'7340'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751164062&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=GszVLybhzypzIsjmJimpDl6Ovp9wDkxtBNI7nDOJu3M%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751164062&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=GszVLybhzypzIsjmJimpDl6Ovp9wDkxtBNI7nDOJu3M%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=89707,stale-if-error=4304,stale-while-revalidate=75'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/search/collections?page=608&per_page=5&query=Taipei>; rel="last", <https://api.unsplash.com/search/collections?page=2&per_page=5&query=Taipei>; rel="next"'), (b'X-Total', b'3037'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"7c1ed230614054928271bdb8c9695f2c"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'38'), (b'X-Request-Id', b'd536cbec-3885-40f9-8643-f378a92572f3'), (b'X-Runtime', b'0.100720'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'86080'), (b'Date', b'Mon, 30 Jun 2025 02:22:23 GMT'), (b'X-Served-By', b'cache-iad-kjyo7100063-IAD, cache-nyc-kteb1890021-NYC'), (b'X-Cache', b'HIT, MISS'), (b'X-Cache-Hits', b'1, 0'), (b'X-Timer', b'S1751250143.161545,VS0,VE9'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept')])
+2025-06-30 02:22:23.174 - INFO - HTTP Request: GET https://api.unsplash.com/search/collections?query=Taipei&page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:23.174 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:23.175 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:23.176 - DEBUG - response_closed.started
+2025-06-30 02:22:23.176 - DEBUG - response_closed.complete
+2025-06-30 02:22:23.182 - DEBUG - close.started
+2025-06-30 02:22:23.182 - DEBUG - close.complete
+2025-06-30 02:22:23.186 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:23.211 - DEBUG - connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-06-30 02:22:23.222 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87238a9550>
+2025-06-30 02:22:23.223 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8723915fd0> server_hostname='api.unsplash.com' timeout=5.0
+2025-06-30 02:22:23.239 - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f87238aa990>
+2025-06-30 02:22:23.239 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:23.240 - DEBUG - send_request_headers.complete
+2025-06-30 02:22:23.240 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-06-30 02:22:23.240 - DEBUG - send_request_body.complete
+2025-06-30 02:22:23.240 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-06-30 02:22:23.406 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'3639'), (b'Server', b'Cowboy'), (b'Report-To', b'{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1751250143&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=V9H%2B35z8zmY45VC8YMN4PWKzCvOweRQp5uCKQqgvcgU%3D"}]}'), (b'Reporting-Endpoints', b'heroku-nel=https://nel.heroku.com/reports?ts=1751250143&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=V9H%2B35z8zmY45VC8YMN4PWKzCvOweRQp5uCKQqgvcgU%3D'), (b'Nel', b'{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}'), (b'Content-Type', b'application/json'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=102255,stale-if-error=4423,stale-while-revalidate=81'), (b'X-Unsplash-Version', b'v1'), (b'Link', b'<https://api.unsplash.com/search/users?page=79&per_page=5&query=Taipei>; rel="last", <https://api.unsplash.com/search/users?page=2&per_page=5&query=Taipei>; rel="next"'), (b'X-Total', b'395'), (b'X-Per-Page', b'5'), (b'X-Powered-By', b'hero-app'), (b'X-Version', b'44ac23fcce1dfb808d3d81277656c99af35397eb'), (b'Content-Language', b'en'), (b'Etag', b'W/"dd9f552bda8cb9ff712d4fd4b66a74df"'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'37'), (b'X-Request-Id', b'91e8f3b4-278a-44e7-ab3b-d4be746619b0'), (b'X-Runtime', b'0.140149'), (b'Content-Encoding', b'gzip'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 vegur, 1.1 varnish, 1.1 varnish'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 30 Jun 2025 02:22:23 GMT'), (b'X-Served-By', b'cache-iad-kiad7000140-IAD, cache-nyc-kteb1890076-NYC'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1751250143.244208,VS0,VE159'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,client-geo-region,Accept')])
+2025-06-30 02:22:23.406 - INFO - HTTP Request: GET https://api.unsplash.com/search/users?query=Taipei&page=1&per_page=5 "HTTP/1.1 200 OK"
+2025-06-30 02:22:23.407 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-06-30 02:22:23.407 - DEBUG - receive_response_body.complete
+2025-06-30 02:22:23.407 - DEBUG - response_closed.started
+2025-06-30 02:22:23.408 - DEBUG - response_closed.complete
+2025-06-30 02:22:23.411 - DEBUG - close.started
+2025-06-30 02:22:23.411 - DEBUG - close.complete
+2025-06-30 02:22:23.454 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:23.581 - DEBUG - https://api.unsplash.com:443 "GET /photos HTTP/1.1" 200 7810
+2025-06-30 02:22:23.587 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:23.633 - DEBUG - https://api.unsplash.com:443 "GET /photos/4ICax0QMs8U HTTP/1.1" 200 4097
+2025-06-30 02:22:23.639 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:23.762 - DEBUG - https://api.unsplash.com:443 "GET /collections HTTP/1.1" 200 14578
+2025-06-30 02:22:23.769 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:23.800 - DEBUG - https://api.unsplash.com:443 "GET /collections/8961198 HTTP/1.1" 200 2061
+2025-06-30 02:22:23.805 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:23.841 - DEBUG - https://api.unsplash.com:443 "GET /users/pawel_czerwinski HTTP/1.1" 200 1437
+2025-06-30 02:22:23.846 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:23.930 - DEBUG - https://api.unsplash.com:443 "GET /users/pawel_czerwinski/photos HTTP/1.1" 200 5619
+2025-06-30 02:22:23.936 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.071 - DEBUG - https://api.unsplash.com:443 "GET /users/pawel_czerwinski/collections HTTP/1.1" 200 8895
+2025-06-30 02:22:24.078 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.186 - DEBUG - https://api.unsplash.com:443 "GET /search/photos?query=Taipei&per_page=5 HTTP/1.1" 200 4060
+2025-06-30 02:22:24.191 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.330 - DEBUG - https://api.unsplash.com:443 "GET /search/collections?query=Taipei&per_page=5 HTTP/1.1" 200 7344
+2025-06-30 02:22:24.336 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.451 - DEBUG - https://api.unsplash.com:443 "GET /search/users?query=Taipei&per_page=5 HTTP/1.1" 200 3639
+2025-06-30 02:22:24.456 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.589 - DEBUG - https://api.unsplash.com:443 "GET /topics HTTP/1.1" 200 13935
+2025-06-30 02:22:24.595 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.628 - DEBUG - https://api.unsplash.com:443 "GET /topics/wallpapers HTTP/1.1" 200 3602
+2025-06-30 02:22:24.633 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.816 - DEBUG - https://api.unsplash.com:443 "GET /topics/wallpapers/photos HTTP/1.1" 200 7931
+2025-06-30 02:22:24.822 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:24.824 - INFO - HTTP Request: GET http://testserver/not-found "HTTP/1.1 404 Not Found"
+2025-06-30 02:22:24.828 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.887 - DEBUG - https://api.unsplash.com:443 "GET /search/photos HTTP/1.1" 400 None
+2025-06-30 02:22:24.893 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:24.951 - DEBUG - https://api.unsplash.com:443 "GET /photos?Authorization=Client-ID+**** HTTP/1.1" 401 None
+2025-06-30 02:22:24.957 - DEBUG - Starting new HTTPS connection (1): api.unsplash.com:443
+2025-06-30 02:22:25.048 - DEBUG - https://api.unsplash.com:443 "GET /not-found HTTP/1.1" 404 50
+2025-06-30 02:22:25.057 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.069 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.077 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.086 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.094 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.102 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.110 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.118 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.126 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.135 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.143 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.151 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.159 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.160 - ERROR - JSON parsing error: Unknown category
+2025-06-30 02:22:25.165 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.166 - ERROR - Type error: type error!
+2025-06-30 02:22:25.171 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.172 - ERROR - An unexpected error occurred: runtime error!
+Traceback (most recent call last):
+  File "/home/runner/work/apis-testing/apis-testing/src/utils/decorators.py", line 15, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/apis-testing/apis-testing/tests/unit/utils/test_decorator.py", line 19, in func
+    raise RuntimeError("runtime error!")
+RuntimeError: runtime error!
+2025-06-30 02:22:25.177 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.181 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.182 - ERROR - API call failed: request failed
+2025-06-30 02:22:25.187 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.188 - ERROR - HTTP error occurred: bad status
+2025-06-30 02:22:25.192 - DEBUG - Using selector: EpollSelector
+2025-06-30 02:22:25.193 - ERROR - JSON parsing error: bad value
+2025-06-30 02:22:25.197 - DEBUG - Using selector: EpollSelector
