@@ -1,0 +1,18 @@
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    httpcore.connection:_trace.py:87 connect_tcp.started host='api.unsplash.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG    httpcore.connection:_trace.py:87 connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f5404ebd9c0>
+DEBUG    httpcore.connection:_trace.py:87 start_tls.started ssl_context=<ssl.SSLContext object at 0x7f5404b157f0> server_hostname='api.unsplash.com' timeout=5.0
+DEBUG    httpcore.connection:_trace.py:87 start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f5404ecbbb0>
+DEBUG    httpcore.http11:_trace.py:87 send_request_headers.started request=<Request [b'GET']>
+DEBUG    httpcore.http11:_trace.py:87 send_request_headers.complete
+DEBUG    httpcore.http11:_trace.py:87 send_request_body.started request=<Request [b'GET']>
+DEBUG    httpcore.http11:_trace.py:87 send_request_body.complete
+DEBUG    httpcore.http11:_trace.py:87 receive_response_headers.started request=<Request [b'GET']>
+DEBUG    httpcore.http11:_trace.py:87 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'3584'), (b'Access-Control-Allow-Headers', b'*'), (b'Access-Control-Allow-Methods', b'*'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining'), (b'Cache-Control', b'max-age=9502,stale-if-error=4383,stale-while-revalidate=80'), (b'Content-Encoding', b'gzip'), (b'Content-Language', b'en'), (b'Content-Type', b'application/json'), (b'Etag', b'W/"9c400f87755baaf8318743a9ddaaeb29"'), (b'Nel', b'{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}'), (b'Report-To', b'{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=fPjjV2p7oR4gL01FnLBF8B29zoqTIYi3mG6FcBQKziM%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1753151057"}],"max_age":3600}'), (b'Reporting-Endpoints', b'heroku-nel="https://nel.heroku.com/reports?s=fPjjV2p7oR4gL01FnLBF8B29zoqTIYi3mG6FcBQKziM%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1753151057"'), (b'Server', b'Heroku'), (b'Strict-Transport-Security', b'max-age=63072000; includeSubDomains'), (b'Via', b'1.1 heroku-router, 1.1 varnish, 1.1 varnish'), (b'X-Powered-By', b'hero-app'), (b'X-Ratelimit-Limit', b'50'), (b'X-Ratelimit-Remaining', b'40'), (b'X-Request-Id', b'56030193-c421-2730-4bd8-bbdaa2ec7b76'), (b'X-Runtime', b'0.043252'), (b'X-Unsplash-Version', b'v1'), (b'X-Version', b'ab76e9c69ec46840694ec15af0e28e6e69581345'), (b'Accept-Ranges', b'bytes'), (b'Age', b'1590'), (b'Date', b'Tue, 22 Jul 2025 02:50:47 GMT'), (b'X-Served-By', b'cache-iad-kjyo7100043-IAD, cache-nyc-kteb1890048-NYC'), (b'X-Cache', b'HIT, MISS'), (b'X-Cache-Hits', b'1, 0'), (b'X-Timer', b'S1753152648.890242,VS0,VE9'), (b'Vary', b'Accept-Encoding,Authorization,Accept-Language,Accept')])
+INFO     httpx:_client.py:1740 HTTP Request: GET https://api.unsplash.com/topics/wallpapers "HTTP/1.1 200 OK"
+DEBUG    httpcore.http11:_trace.py:87 receive_response_body.started request=<Request [b'GET']>
+DEBUG    httpcore.http11:_trace.py:87 receive_response_body.complete
+DEBUG    httpcore.http11:_trace.py:87 response_closed.started
+DEBUG    httpcore.http11:_trace.py:87 response_closed.complete
+DEBUG    httpcore.connection:_trace.py:87 close.started
+DEBUG    httpcore.connection:_trace.py:87 close.complete

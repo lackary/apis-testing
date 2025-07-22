@@ -1,0 +1,2 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:1049 Starting new HTTPS connection (1): api.unsplash.com:443
+DEBUG    urllib3.connectionpool:connectionpool.py:544 https://api.unsplash.com:443 "GET /photos?Authorization=Client-ID+2cZ-w6P4DbX0jVJ7wNONYH_Re7tjInRcXJI8LEH1yGY HTTP/1.1" 401 78
