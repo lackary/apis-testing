@@ -6,8 +6,8 @@ on:
     # tags: ["v*"] # Uncomment if you want to trigger on tags
   pull_request:
     branches: ["*"]
-  schedule:
-    - cron: "0 0 * * *" # Runs every day at midnight UTC+8
+  # schedule:
+  #   - cron: "0 0 * * *" # Runs every day at midnight UTC+8
   workflow_dispatch:
 
 jobs:
